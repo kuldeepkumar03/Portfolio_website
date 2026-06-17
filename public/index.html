@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kuldeep Kumar — AI Systems Engineer building production ML at scale">
+  <title>Kuldeep Kumar — AI Systems Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── CURSOR ── -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring"></div>
+  <canvas id="lightningCanvas"></canvas>
+
+  <!-- ── NAV ── -->
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <div class="logo" onclick="scrollToSection('home')">
+          <span class="logo-k">K</span><span class="logo-k2">K</span>
+          <div class="logo-pulse"></div>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+          <a href="#home"       class="nav-link active" data-section="home">Home</a>
+          <a href="#about"      class="nav-link"        data-section="about">About</a>
+          <a href="#projects"   class="nav-link"        data-section="projects">Projects</a>
+          <a href="#experience" class="nav-link"        data-section="experience">Experience</a>
+          <a href="#skills"     class="nav-link"        data-section="skills">Skills</a>
+          <a href="#contact"    class="nav-link"        data-section="contact">Contact</a>
+        </nav>
+        <div class="nav-right">
+          <button class="resume-btn" onclick="console.log('resume')">
+            <span>Resume</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4M1 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section id="home" class="hero">
+    <video class="hero-bg-video" id="heroBgVideo" muted autoplay loop playsinline>
+      <source src="videos/avatar.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <!-- Floating grid lines -->
+    <div class="hero-grid"></div>
+
+    <!-- Ambient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+      <div class="hero-layout">
+
+        <!-- LEFT: Text -->
+        <div class="hero-text" data-reveal>
+          <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>FROM DATA TO DECISIONS → TRANSFORMING CUSTOMER EXPERIENCE</span>
+          </div>
+
+          <h1 class="hero-heading">
+            <span class="line-mask"><span>Building AI Systems</span></span>
+            <span class="line-mask"><span>That Deliver</span></span>
+            <span class="line-mask"><span class="gradient-text">Real Impact</span></span>
+          </h1>
+
+          <p class="hero-sub">
+            I ship production-ready ML at ShipDelight — delivery prediction, dispatch intelligence, and risk modeling across <strong>20–30K shipments daily</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              Explore Work
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-ghost">Let's Connect</a>
+          </div>
+
+
+        </div>
+
+        <!-- RIGHT: AI Avatar Card -->
+        <div class="hero-card-area" data-reveal data-delay="200">
+          <div class="ai-card floating">
+            <div class="ai-card-top">
+              <div class="ai-status">
+                <span class="pulse-dot"></span>
+                <span class="ai-label">AI AVATAR · LIVE</span>
+              </div>
+              <div class="ai-controls">
+                <button class="ctrl-btn" id="videoPlayPauseBtn" title="Play / Pause">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="playIcon"><path d="M4 2l8 5-8 5V2z" fill="currentColor"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="pauseIcon" style="display:none"><rect x="3" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="8" y="2" width="3" height="10" rx="1" fill="currentColor"/></svg>
+                </button>
+                <button class="ctrl-btn" id="videoMuteBtn" title="Mute / Unmute">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="muteIcon"><path d="M2 5v4h3l4 3V2L5 5H2z" fill="currentColor"/><path d="M11 4.5c.8.7 1.3 1.7 1.3 2.5s-.5 1.8-1.3 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="unmuteIcon" style="display:none"><path d="M2 5v4h3l4 3V2L5 5H2z" fill="currentColor"/><path d="M10 5l3 3M13 5l-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="audio-visualizer" id="visualizer">
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-cue" id="scrollCue">
+      <div class="scroll-cue-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+<!-- ── ABOUT ── -->
+<section id="about" class="section about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- LEFT COPY -->
+      <div class="about-copy" data-reveal>
+        <div class="section-label">About</div>
+        <div class="section-label-line"></div>
+        <h2 class="section-heading">From Student to<br>AI Systems Builder</h2>
+        <p>I joined ShipDelight when prediction systems were outsourced. We rebuilt everything in-house—from delivery prediction and analytics to risk intelligence and customer communication. Today, these systems power thousands of decisions every day.</p>
+          <p>I transform complex data into scalable ML systems that deliver measurable outcomes.</p>
+        <a href="#contact" class="text-link">Let's talk about your problem <span>→</span></a>
+      </div>
+
+      <!-- RIGHT: Career Timeline Panel -->
+      <div class="journey-panel" data-reveal data-delay="150">
+        <div class="panel-header">
+          <span class="panel-title">Career&nbsp;&nbsp;Timeline</span>
+          <div class="panel-dots">
+            <div class="pdot pdot-1"></div>
+            <div class="pdot pdot-2"></div>
+            <div class="pdot pdot-3"></div>
+          </div>
+        </div>
+
+        <div class="timeline">
+
+          <!-- Now -->
+          <div class="t-row">
+            <div class="t-icon-col">
+              <div class="t-circle tc-rocket">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.5C12 2.5 7.5 6.5 7.5 13.5H16.5C16.5 6.5 12 2.5 12 2.5Z" fill="rgba(0,230,255,0.25)" stroke="#00e8ff" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M9.5 13.5C9.5 13.5 8.5 15.5 8.5 17.5H15.5C15.5 15.5 14.5 13.5 14.5 13.5H9.5Z" fill="rgba(0,230,255,0.15)" stroke="#00e8ff" stroke-width="1.4" stroke-linejoin="round"/>
+                  <circle cx="12" cy="9" r="1.8" fill="#00e8ff"/>
+                  <path d="M8.5 17.5L6.5 20.5" stroke="#00e8ff" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M15.5 17.5L17.5 20.5" stroke="#00e8ff" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="t-line tl-cyan-purple"></div>
+            </div>
+            <div class="t-content">
+              <span class="now-text">Current</span>
+              <h4>Junior Data Scientist</h4>
+              <p>ShipDelight — Production ML at scale</p>
+            </div>
+          </div>
+
+          <!-- 2024 -->
+          <div class="t-row">
+            <div class="t-icon-col">
+              <div class="t-circle tc-robot">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <rect x="6.5" y="6.5" width="11" height="11" rx="2.5" fill="rgba(140,100,240,0.2)" stroke="#9b7ff8" stroke-width="1.5"/>
+                  <path d="M9 3V6M15 3V6M9 18V21M15 18V21M3 9H6M3 15H6M18 9H21M18 15H21" stroke="#9b7ff8" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="9.5" cy="10.5" r="1.2" fill="#9b7ff8"/>
+                  <circle cx="14.5" cy="10.5" r="1.2" fill="#9b7ff8"/>
+                  <path d="M9.5 14H14.5" stroke="#9b7ff8" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="t-line tl-purple-green"></div>
+            </div>
+            <div class="t-content">
+              <span class="t-year ty-purple">2024</span>
+              <h4>AI Engineer Intern</h4>
+              <p>VBluid Tech — LLMs &amp; RAG systems</p>
+            </div>
+          </div>
+
+          <!-- 2023 -->
+          <div class="t-row">
+            <div class="t-icon-col">
+              <div class="t-circle tc-code">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M7.5 8L3 12L7.5 16" stroke="#00c884" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.5 8L21 12L16.5 16" stroke="#00c884" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14 5L10 19" stroke="#00c884" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="t-line tl-green-gold"></div>
+            </div>
+            <div class="t-content">
+              <span class="t-year ty-green">2023</span>
+              <h4>Data Science Intern</h4>
+              <p>iNeuron.ai — Feature engineering, analytics</p>
+            </div>
+          </div>
+
+          <!-- 2020 -->
+          <div class="t-row">
+            <div class="t-icon-col">
+              <div class="t-circle tc-grad">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3L22 8.5L12 14L2 8.5L12 3Z" fill="rgba(220,160,0,0.2)" stroke="#d4a017" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M6 11V16.5C6 16.5 8.7 19.5 12 19.5C15.3 19.5 18 16.5 18 16.5V11" stroke="#d4a017" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M22 8.5V13.5" stroke="#d4a017" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="t-content">
+              <span class="t-year ty-gold">2020</span>
+              <h4>B.Tech — Computer Science and Engineering</h4>
+              <p>Started the ML obsession</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Metrics strip -->
+    <div class="metrics-strip" data-reveal data-delay="250">
+
+      <div class="metric-card">
+        <div class="m-icon mi-cyan">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="8" stroke="#00d8f0" stroke-width="1.8"/>
+  <circle cx="12" cy="12" r="4" stroke="#00d8f0" stroke-width="1.5"/>
+  <circle cx="12" cy="12" r="1.5" fill="#00d8f0"/>
+  <path d="M12 2V5M12 19V22M2 12H5M19 12H22"
+        stroke="#00d8f0"
+        stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+        </div>
+        <div>
+          <span class="m-num mn-cyan">Current Focus</span>
+          <span class="m-label">Production ML</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="m-icon mi-purple">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+  <path d="M10 4C8 4 6.5 5.5 6.5 7.5C6.5 8.5 7 9.5 7.8 10
+           C7 10.5 6.5 11.5 6.5 12.5
+           C6.5 14.5 8 16 10 16"
+        stroke="#a07af5"
+        stroke-width="1.8"
+        stroke-linecap="round"/>
+  <path d="M14 4C16 4 17.5 5.5 17.5 7.5C17.5 8.5 17 9.5 16.2 10
+           C17 10.5 17.5 11.5 17.5 12.5
+           C17.5 14.5 16 16 14 16"
+        stroke="#a07af5"
+        stroke-width="1.8"
+        stroke-linecap="round"/>
+  <path d="M10 16V20M14 16V20M10 8H14M10 12H14"
+        stroke="#a07af5"
+        stroke-width="1.6"
+        stroke-linecap="round"/>
+</svg>
+        </div>
+        <div>
+          <span class="m-num mn-purple">Learning</span>
+          <span class="m-label">Agentic AI</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="m-icon mi-green">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+  <path d="M12 3C12 3 8 6.5 8 12H16C16 6.5 12 3 12 3Z"
+        fill="rgba(0,200,120,0.15)"
+        stroke="#00c878"
+        stroke-width="1.8"/>
+  <circle cx="12" cy="8.5" r="1.5" fill="#00c878"/>
+  <path d="M9 12L7 16M15 12L17 16"
+        stroke="#00c878"
+        stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+        </div>
+        <div>
+          <span class="m-num mn-green">Building</span>
+          <span class="m-label">Side Projects</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="m-icon mi-pink">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+  <path d="M13 2L6 13H11L9 22L18 10H13L13 2Z"
+        fill="rgba(220,70,170,0.15)"
+        stroke="#e060c0"
+        stroke-width="1.6"
+        stroke-linejoin="round"/>
+</svg>
+        </div>
+        <div>
+          <span class="m-num mn-pink">Philosophy</span>
+          <span class="m-label">Build->Measure->Improve</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects" class="section projects">
+    <div class="container">
+
+      <div class="section-label">Projects</div>
+      <div class="section-label-line"></div>
+      <div class="section-header-row">
+        <h2 class="section-heading">Featured Work</h2>
+        <a href="#" class="text-link sm">View all <span>→</span></a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- P1 -->
+        <div class="project-card featured" data-reveal>
+          <div class="project-status prod">Production</div>
+          <h3>EDD Prediction System</h3>
+          <p class="project-desc">Multi-stage prediction architecture combining XGBoost ensembles with LightGBM buffering for reliable delivery estimates, leveraging historical trends, pattern intelligence, and adaptive model selection.</p>
+
+         <div class="edd-pipeline">
+
+    <div class="pipeline-node">
+        <span class="node-title">XGBoost</span>
+        <small>3M • 1M • 15D</small>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-node">
+        <span class="node-title">Routing</span>
+        <small>Engine</small>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-node">
+        <span class="node-title">LightGBM</span>
+        <small>Buffer</small>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-node final-node edd-glow">
+        <span class="node-title">Final EDD</span>
+        <small>Prediction</small>
+    </div>
+    
+
+</div>
+
+          <div class="project-impact-row">
+    <div class="impact-pill">
+        <strong>XGBoost</strong>
+        Primary Model
+    </div>
+
+    <div class="impact-pill">
+        <strong>LightGBM</strong>
+        Buffer Layer
+    </div>
+
+    <div class="impact-pill">
+        <strong>Ensemble</strong>
+        Architecture
+    </div>
+</div>
+
+          <div class="project-impact-row">
+            <div class="impact-pill"><strong>90%+</strong> Accuracy</div>
+            <div class="impact-pill"><strong>15–20K</strong> Daily Predictions</div>
+          </div>
+        </div>
+
+        <!-- P2 -->
+        <div class="project-card" data-reveal data-delay="100">
+          <div class="project-status prod">Production</div>
+          <h3>DispatchIQ</h3>
+          <p class="project-desc">Dispatch intelligence platform delivering dispatch visibility,
+risk detection, GMV impact analysis, and EDD breach forecasting.</p>
+
+          <div class="arch-flow">
+            <div class="arch-node">Dispatch Monitoring</div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-node">Risk Intelligence</div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-node impact-node">Revenue Protection </div>
+          </div>
+
+          <div class="feature-grid">
+
+  <div class="feature-item">
+    <span class="feature-icon">📊</span>
+    <span>DRI Monitoring</span>
+  </div>
+
+  <div class="feature-item">
+    <span class="feature-icon">💰</span>
+    <span>GMV Impact Analysis</span>
+  </div>
+
+  <div class="feature-item">
+    <span class="feature-icon">🚨</span>
+    <span>Risk Tagging</span>
+  </div>
+
+  <div class="feature-item">
+    <span class="feature-icon">📦</span>
+    <span>SKU Intelligence</span>
+  </div>
+
+  <div class="feature-item">
+    <span class="feature-icon">⏱️</span>
+    <span>Dispatch Bucketing</span>
+  </div>
+
+  <div class="feature-item">
+    <span class="feature-icon">🎯</span>
+    <span>EDD Forecasting</span>
+  </div>
+
+</div>
+
+         <div class="project-tags">
+    <span>6 Intelligence Modules</span>
+    <span>Revenue Impact</span>
+    <span>EDD Forecasting</span>
+        </div>
+</div>
+        <!-- P3 -->
+        <div class="project-card" data-reveal data-delay="200">
+          <div class="project-status dev">In Development</div>
+          <h3>Therapy Connect</h3>
+          <p class="project-desc">AI-powered therapy assistant with Whisper speech transcription, BLTM emotion detection, and RAG-powered contextual responses — empathy at scale.</p>
+
+          <div class="therapy-pipeline">
+            <div class="pipe-step">🎙️ Audio In</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">Whisper STT</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">BLTM Emotion</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">RAG Response</div>
+          </div>
+
+          <div class="project-chips">
+            <span class="chip">Whisper</span>
+            <span class="chip">RAG</span>
+            <span class="chip">BLTM</span>
+            <span class="chip">LLM</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section skills">
+    <div class="container">
+
+      <div class="section-label">Skills</div>
+      <h2 class="section-heading">Tech I Work With</h2>
+
+      <div class="skills-layout">
+
+        <div class="skill-cols" data-reveal>
+          <div class="skill-col">
+            <h4 class="col-heading">Languages & Libraries</h4>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Scikit-learn</span>
+            </div>
+          </div>
+          <div class="skill-col">
+            <h4 class="col-heading">ML & Modelling</h4>
+            <div class="tags">
+              <span class="tag">XGBoost</span>
+              <span class="tag">LightGBM</span>
+              <span class="tag">LSTM</span>
+              <span class="tag">ARIMA</span>
+            </div>
+          </div>
+          <div class="skill-col">
+            <h4 class="col-heading">Infrastructure</h4>
+            <div class="tags">
+              <span class="tag">AWS S3 / ECS</span>
+              <span class="tag">Docker</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-col">
+            <h4 class="col-heading">AI & LLMs</h4>
+            <div class="tags">
+              <span class="tag">RAG</span>
+              <span class="tag">OpenAI API</span>
+              <span class="tag">Gemini Pro</span>
+              <span class="tag">LangChain</span>
+            </div>
+          </div>
+          <div class="skill-col">
+            <h4 class="col-heading">Analytics</h4>
+            <div class="tags">
+              <span class="tag">Power BI</span>
+              <span class="tag">Metabase</span>
+              <span class="tag">Seaborn</span>
+              <span class="tag">Flask</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="radar-wrap" data-reveal data-delay="150">
+          <div class="radar-label">Core Expertise</div>
+          <canvas id="radarChart" width="340" height="340"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience" class="section experience">
+    <div class="container">
+
+      <div class="section-label">Experience</div>
+      <h2 class="section-heading">Where I've Worked</h2>
+
+      <div class="exp-carousel-wrap">
+        <div class="exp-track" id="expTrack">
+
+          <div class="exp-card" data-reveal>
+            <div class="exp-co-badge sd">SD</div>
+            <div class="exp-info">
+              <span class="exp-period">Oct 2024 — Present</span>
+              <h3>Senior Data Scientist</h3>
+              <p class="exp-co">ShipDelight</p>
+              <p class="exp-desc">Leading production ML — delivery prediction, dispatch intelligence, risk modelling. Own the pipeline end-to-end.</p>
+              <div class="exp-tags">
+                <span class="tag sm">XGBoost</span>
+                <span class="tag sm">LightGBM</span>
+                <span class="tag sm">AWS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-card" data-reveal data-delay="80">
+            <div class="exp-co-badge sd">SD</div>
+            <div class="exp-info">
+              <span class="exp-period">Feb 2024 — Oct 2024</span>
+              <h3>Frontend Engineer</h3>
+              <p class="exp-co">ShipDelight</p>
+              <p class="exp-desc">Shipped secure internal dashboards and operational tools used daily by the ops team.</p>
+              <div class="exp-tags">
+                <span class="tag sm">React</span>
+                <span class="tag sm">Internal Tools</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-card" data-reveal data-delay="160">
+            <div class="exp-co-badge vb">VB</div>
+            <div class="exp-info">
+              <span class="exp-period">Jun 2023 — Aug 2024</span>
+              <h3>AI Engineering Intern</h3>
+              <p class="exp-co">VBluid Tech</p>
+              <p class="exp-desc">Built LLM-powered features with OpenAI, LangChain, and optimised retrieval for RAG pipelines.</p>
+              <div class="exp-tags">
+                <span class="tag sm">OpenAI</span>
+                <span class="tag sm">RAG</span>
+                <span class="tag sm">Python</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-card" data-reveal data-delay="240">
+            <div class="exp-co-badge ml">ML</div>
+            <div class="exp-info">
+              <span class="exp-period">Nov 2022 — Nov 2023</span>
+              <h3>ML Engineer</h3>
+              <p class="exp-co">Final Year Project</p>
+              <p class="exp-desc">Deep dive into feature engineering, data analysis and model building on real-world datasets.</p>
+              <div class="exp-tags">
+                <span class="tag sm">Python</span>
+                <span class="tag sm">Scikit-learn</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="carousel-controls">
+          <button class="cc-btn" id="carouselPrev">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-dots" id="carouselDots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <button class="cc-btn" id="carouselNext">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-label">Impact</div>
+      <h2 class="section-heading">What People Say</h2>
+
+      <div class="testimonials-grid">
+
+        <div class="t-card" data-reveal>
+          <div class="t-stars">★★★★★</div>
+          <p>"Kuldeep played a key role in building our in-house ML systems from scratch. Accuracy and ownership are exceptional."</p>
+          <div class="t-author">
+            <div class="t-avatar">CS</div>
+            <div>
+              <strong>Chris Samuel</strong>
+              <span>Lead, ShipDelight</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-card featured" data-reveal data-delay="100">
+          <div class="t-stars">★★★★★</div>
+          <p>"DispatchIQ completely changed how we track delays and risk. The insights are accurate and scale to real-time production."</p>
+          <div class="t-author">
+            <div class="t-avatar">OM</div>
+            <div>
+              <strong>Ops Manager</strong>
+              <span>Logistics Client</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-card" data-reveal data-delay="200">
+          <div class="t-stars">★★★★★</div>
+          <p>"Kuldeep is not just a coder — he thinks about business impact. Every insight drives the iteration forward."</p>
+          <div class="t-author">
+            <div class="t-avatar">TL</div>
+            <div>
+              <strong>Tech Lead</strong>
+              <span>VBluid Tech</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="contact-inner" data-reveal>
+        <div class="contact-eyebrow">Open to opportunities</div>
+        <h2>Let's Build Something<br><span class="gradient-text">Great Together</span></h2>
+        <p class="contact-sub">Whether it's a senior ML role, a consulting project, or just a chat about AI systems — my inbox is open.</p>
+        <div class="contact-actions">
+          <a href="mailto:kuldeep@example.com" class="btn btn-primary">
+            Say Hello
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/kuldeep-kumar1207" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-k">K</span><span class="logo-k2">K</span>
+          <span class="footer-tagline">AI Systems Engineer</span>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:kuldeep@example.com">kuldeep@example.com</a>
+          <a href="tel:+918045638514">+91 80456 38514</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+        </div>
+        <p class="footer-copy">© 2025 Kuldeep Kumar</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
