@@ -232,7 +232,7 @@ document.querySelectorAll('.nav-link, .btn[href^="#"], a[href^="#"]').forEach(li
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      window.scrollTo({ top: target.offsetTop - 1, behavior: 'smooth' });
+      window.scrollTo({ top: target.offsetTop - 0.5, behavior: 'smooth' });
     }
   });
 });
