@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects Library — Kk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/project.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NAVBAR
+════════════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to Portfolio
+  </a>
+  <span class="nav-title">Projects Library</span>
+</nav>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════
+       HERO
+  ════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Engineering Portfolio</div>
+      <h1>Projects<br><span>Library</span></h1>
+      <p class="hero-sub">Production ML systems, AI applications, and machine learning solutions built to solve real-world business problems.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 240 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow1"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow2"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00d2ff" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="#a855f7" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="120" cy="110" rx="90" ry="80" fill="url(#cg)" opacity=".04"/>
+        <!-- Cube bottom -->
+        <g filter="url(#glow1)" opacity=".85">
+          <polygon points="80,160 120,180 160,160 120,140" fill="#0f2035" stroke="#00d2ff" stroke-width="1"/>
+          <polygon points="80,160 80,130 120,150 120,180" fill="#0b1827" stroke="#00d2ff" stroke-width="1"/>
+          <polygon points="160,160 160,130 120,150 120,180" fill="#07101d" stroke="#00d2ff" stroke-width=".8"/>
+          <polygon points="80,130 120,150 160,130 120,110" fill="url(#cg)" opacity=".15" stroke="#00d2ff" stroke-width="1"/>
+        </g>
+        <!-- Cube mid -->
+        <g filter="url(#glow1)" opacity=".9">
+          <polygon points="60,110 100,130 140,110 100,90" fill="#0f2035" stroke="#a855f7" stroke-width="1"/>
+          <polygon points="60,110 60,80 100,100 100,130" fill="#0b1827" stroke="#a855f7" stroke-width="1"/>
+          <polygon points="140,110 140,80 100,100 100,130" fill="#07101d" stroke="#a855f7" stroke-width=".8"/>
+          <polygon points="60,80 100,100 140,80 100,60" fill="url(#cg)" opacity=".2" stroke="#a855f7" stroke-width="1"/>
+        </g>
+        <!-- Cube top -->
+        <g filter="url(#glow2)" opacity=".95">
+          <polygon points="100,80 140,100 180,80 140,60" fill="#0f2035" stroke="#00d2ff" stroke-width="1.2"/>
+          <polygon points="100,80 100,50 140,70 140,100" fill="#0b1827" stroke="#00d2ff" stroke-width="1.2"/>
+          <polygon points="180,80 180,50 140,70 140,100" fill="#07101d" stroke="#00d2ff" stroke-width="1"/>
+          <polygon points="100,50 140,70 180,50 140,30" fill="url(#cg)" opacity=".4" stroke="#00d2ff" stroke-width="1.2"/>
+        </g>
+        <!-- Ambient nodes -->
+        <circle cx="40"  cy="60"  r="4" fill="#00d2ff" filter="url(#glow1)" opacity=".7"/>
+        <circle cx="200" cy="90"  r="3" fill="#a855f7" filter="url(#glow1)" opacity=".7"/>
+        <circle cx="30"  cy="140" r="3" fill="#3b82f6" filter="url(#glow1)" opacity=".6"/>
+        <circle cx="210" cy="155" r="4" fill="#22c55e" filter="url(#glow1)" opacity=".6"/>
+        <line x1="40"  y1="60"  x2="100" y2="80"  stroke="#00d2ff" stroke-width=".5" opacity=".3"/>
+        <line x1="200" y1="90"  x2="140" y2="80"  stroke="#a855f7" stroke-width=".5" opacity=".3"/>
+        <line x1="30"  y1="140" x2="80"  y2="130" stroke="#3b82f6" stroke-width=".5" opacity=".3"/>
+        <line x1="210" y1="155" x2="160" y2="150" stroke="#22c55e" stroke-width=".5" opacity=".3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       STATS
+  ════════════════════════════════════ -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-icon">🗂</div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">Total Projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Production Systems</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🧠</div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">AI / GenAI Projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📊</div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">ML & Automation</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       INSTRUCTION
+  ════════════════════════════════════ -->
+  <div class="instruction">
+    <span class="instruction-dot"></span>
+    Click any project to expand and view details
+    <span class="instruction-dot"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 1 — PRODUCTION SYSTEMS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="section-group open">
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <div>
+        <div class="section-label" style="color:var(--green)">1. Production Systems</div>
+        <div class="section-sub">Systems deployed in production driving real business impact</div>
+      </div>
+      <span class="section-chevron">▾</span>
+    </div>
+    <div class="section-body-wrap">
+      <div class="section-body">
+
+        <!-- EDD Prediction System -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon green-icon">📦</div>
+            <div class="acc-info">
+              <div class="acc-name">EDD Prediction System <span class="badge badge-green" style="margin-left:8px">Production</span></div>
+              <div class="acc-desc">ML system predicting estimated delivery dates for 15–20K shipments daily with 95%+ accuracy.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val">95%+</div>
+                <div class="acc-stat-lbl">Accuracy</div>
+              </div>
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val">20K</div>
+                <div class="acc-stat-lbl">Predictions/Day</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">An end-to-end production ML pipeline that predicts estimated delivery dates across three time horizons — 3-month, 1-month, and 15-day windows — enabling the business to set accurate customer expectations and reduce failed deliveries. Deployed on AWS with real-time inference at scale.</div>
+                </div>
+
+                <div class="panel-block full">
+                  <div class="block-label">Architecture Flow</div>
+                  <div class="arch-flow">
+                    <div class="arch-node"><div class="arch-node-icon">🗄</div><div class="arch-node-label">Raw Data</div><div class="arch-node-sub">MongoDB</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">⚙️</div><div class="arch-node-label">Feature Engineering</div><div class="arch-node-sub">PySpark</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">🤖</div><div class="arch-node-label">XGBoost Models</div><div class="arch-node-sub">3M / 1M / 15D</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">🔀</div><div class="arch-node-label">Routing Engine</div><div class="arch-node-sub">Logic Layer</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">🛡</div><div class="arch-node-label">LightGBM Buffer</div><div class="arch-node-sub">Adaptive</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">📅</div><div class="arch-node-label">EDD Prediction</div><div class="arch-node-sub">Final Output</div></div>
+                  </div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Business Impact</div>
+                  <ul class="impact-list">
+                    <li>Improved delivery date accuracy across 15–20K daily shipments</li>
+                    <li>Reduced failed deliveries and improved customer satisfaction</li>
+                    <li>Adaptive buffering using real-time dispatch intelligence</li>
+                    <li>Direct revenue protection via accurate ETA commitments</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Metrics</div>
+                  <div class="metrics-row">
+                    <div class="metric-item"><div class="metric-val" style="color:var(--green)">95%+</div><div class="metric-lbl">Accuracy</div></div>
+                    <div class="metric-item"><div class="metric-val" style="color:var(--cyan)">20K</div><div class="metric-lbl">Preds/Day</div></div>
+                    <div class="metric-item"><div class="metric-val" style="color:var(--blue)">3</div><div class="metric-lbl">Time Horizons</div></div>
+                  </div>
+                  <div style="height:16px"></div>
+                  <div class="block-label">Deployment</div>
+                  <div class="deploy-row">
+                    <span class="badge badge-green">Production System</span>
+                    <span class="badge badge-cyan">Internal Deployment</span>
+                  </div>
+                </div>
+
+                <div class="panel-block full">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">PySpark</span><span class="tech-pill">XGBoost</span><span class="tech-pill">LightGBM</span><span class="tech-pill">MongoDB</span><span class="tech-pill">AWS EC2</span><span class="tech-pill">AWS S3</span><span class="tech-pill">Docker</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /EDD -->
+
+        <!-- DispatchIQ -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon green-icon">🚚</div>
+            <div class="acc-info">
+              <div class="acc-name">DispatchIQ <span class="badge badge-green" style="margin-left:8px">Production</span></div>
+              <div class="acc-desc">Intelligent dispatch recommendation engine optimising routes, reducing RTO, and protecting GMV in real time.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val">Live</div>
+                <div class="acc-stat-lbl">Optimisation</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">DispatchIQ is a real-time dispatch intelligence platform that analyses courier risk, SKU-level patterns, and GMV exposure to recommend optimal dispatch partners. It reduces return-to-origin rates while protecting business revenue through probabilistic risk scoring.</div>
+                </div>
+
+                <div class="panel-block full">
+                  <div class="block-label">Architecture Flow</div>
+                  <div class="arch-flow">
+                    <div class="arch-node"><div class="arch-node-icon">📡</div><div class="arch-node-label">Dispatch Monitoring</div><div class="arch-node-sub">Real-time</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">🧮</div><div class="arch-node-label">Risk Intelligence</div><div class="arch-node-sub">Scoring Engine</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">💰</div><div class="arch-node-label">Revenue Protection</div><div class="arch-node-sub">GMV Guard</div></div>
+                  </div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Core Modules</div>
+                  <ul class="impact-list">
+                    <li>DRI — Dispatch Risk Index scoring</li>
+                    <li>GMV Analysis — revenue exposure mapping</li>
+                    <li>Risk Tagging — courier-level profiling</li>
+                    <li>SKU Intelligence — item-level failure prediction</li>
+                    <li>Dispatch Bucket — cohort routing logic</li>
+                    <li>EDD Forecasting — integrated delivery windows</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Business Impact</div>
+                  <ul class="impact-list">
+                    <li>Measurable reduction in RTO rates</li>
+                    <li>Proactive GMV protection through risk-aware routing</li>
+                    <li>Real-time courier recommendation at order level</li>
+                  </ul>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-green">Production System</span>
+                    <span class="badge badge-cyan">Internal Deployment</span>
+                  </div>
+                </div>
+
+                <div class="panel-block full">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">LightGBM</span><span class="tech-pill">MongoDB</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Redis</span><span class="tech-pill">AWS</span><span class="tech-pill">Docker</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /DispatchIQ -->
+
+      </div><!-- /section-body -->
+    </div><!-- /section-body-wrap -->
+  </div><!-- /section-group prod -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 2 — GENERATIVE AI
+  ══════════════════════════════════════════════════════════ -->
+  <div class="section-group open">
+    <div class="section-header">
+      <span class="section-icon">🧠</span>
+      <div>
+        <div class="section-label" style="color:var(--purple)">2. Generative AI Projects</div>
+        <div class="section-sub">AI-powered applications and intelligent assistants</div>
+      </div>
+      <span class="section-chevron">▾</span>
+    </div>
+    <div class="section-body-wrap">
+      <div class="section-body">
+
+        <!-- Therapy Connect -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon purple-icon">🫀</div>
+            <div class="acc-info">
+              <div class="acc-name">Therapy Connect <span class="badge badge-purple" style="margin-left:8px">GenAI</span></div>
+              <div class="acc-desc">AI companion for emotional wellbeing using voice understanding, emotion detection, and RAG-powered counseling.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--purple)">RAG</div>
+                <div class="acc-stat-lbl">+ LLM</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">An AI-powered emotional wellness companion that combines speech analysis, real-time emotion detection, and retrieval-augmented generation to deliver empathetic, context-aware therapeutic responses. Designed to assist users in managing stress and emotional wellbeing through conversational AI.</div>
+                </div>
+
+                <div class="panel-block full">
+                  <div class="block-label">Architecture Flow</div>
+                  <div class="arch-flow">
+                    <div class="arch-node"><div class="arch-node-icon">🎙</div><div class="arch-node-label">Voice Understanding</div><div class="arch-node-sub">Speech Analysis</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">💡</div><div class="arch-node-label">Emotion Intelligence</div><div class="arch-node-sub">Detection Model</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">🧾</div><div class="arch-node-label">Context Memory</div><div class="arch-node-sub">RAG Knowledge</div></div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node"><div class="arch-node-icon">💬</div><div class="arch-node-label">Therapeutic Response</div><div class="arch-node-sub">LLM Output</div></div>
+                  </div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Core Modules</div>
+                  <ul class="impact-list">
+                    <li>Speech Analysis — tone and prosody detection</li>
+                    <li>Emotion Detection — multi-class sentiment model</li>
+                    <li>Context Memory — session state management</li>
+                    <li>AI Counseling — empathy-tuned LLM responses</li>
+                    <li>RAG Knowledge — therapeutic domain retrieval</li>
+                    <li>Real-Time Response — sub-second inference</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Deployment</div>
+                  <div class="deploy-row" style="flex-direction:column; gap:8px; align-items:flex-start">
+                    <span class="badge badge-purple">RAG System</span>
+                    <span class="badge badge-purple">GenAI</span>
+                  </div>
+                  <div style="height:14px"></div>
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">LangChain</span><span class="tech-pill">OpenAI</span><span class="tech-pill">Whisper</span><span class="tech-pill">FAISS</span><span class="tech-pill">FastAPI</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /Therapy Connect -->
+
+        <!-- MLTE -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon purple-icon">✍️</div>
+            <div class="acc-info">
+              <div class="acc-name">MLTE — Multilingual Text Enhancer <span class="badge badge-purple" style="margin-left:8px">GenAI</span></div>
+              <div class="acc-desc">Multilingual text enhancement, summarization, and simplification powered by transformer models.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--purple)">NLP</div>
+                <div class="acc-stat-lbl">Pipeline</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">MLTE is a multilingual NLP pipeline that enhances, summarizes, and simplifies text across languages using state-of-the-art transformer models. It serves writers, non-native speakers, and content teams who need polished, accessible prose at scale.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Capabilities</div>
+                  <ul class="impact-list">
+                    <li>Grammar and style enhancement across 10+ languages</li>
+                    <li>Abstractive and extractive summarization</li>
+                    <li>Readability simplification for target audiences</li>
+                    <li>Tone and register adaptation</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">HuggingFace</span><span class="tech-pill">Transformers</span><span class="tech-pill">BART</span><span class="tech-pill">mT5</span><span class="tech-pill">Streamlit</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-purple">NLP Pipeline</span>
+                    <span class="badge badge-purple">GenAI</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /MLTE -->
+
+        <!-- LinkedIn Automation -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon orange-icon">🔗</div>
+            <div class="acc-info">
+              <div class="acc-name">LinkedIn Automation <span class="badge badge-orange" style="margin-left:8px">Automation</span></div>
+              <div class="acc-desc">Automated LinkedIn content generation and scheduling system using LLM + n8n workflow orchestration.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--orange)">n8n</div>
+                <div class="acc-stat-lbl">+ LLM</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">An end-to-end automation system that generates, reviews, and schedules LinkedIn content using LLM-powered writing agents orchestrated through n8n. Reduces manual effort from hours to minutes while maintaining a consistent professional voice.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Workflow</div>
+                  <ul class="impact-list">
+                    <li>Topic ingestion from curated RSS / manual input</li>
+                    <li>LLM drafts content in personal tone</li>
+                    <li>Auto-review and hashtag generation</li>
+                    <li>Scheduled posting via LinkedIn API</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">n8n</span><span class="tech-pill">OpenAI</span><span class="tech-pill">Python</span><span class="tech-pill">LinkedIn API</span><span class="tech-pill">Airtable</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-orange">Automation</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /LinkedIn -->
+
+      </div>
+    </div>
+  </div><!-- /section genai -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 3 — MACHINE LEARNING
+  ══════════════════════════════════════════════════════════ -->
+  <div class="section-group open">
+    <div class="section-header">
+      <span class="section-icon">📊</span>
+      <div>
+        <div class="section-label" style="color:var(--blue)">3. Machine Learning Projects</div>
+        <div class="section-sub">Classic ML models solving real-world problems</div>
+      </div>
+      <span class="section-chevron">▾</span>
+    </div>
+    <div class="section-body-wrap">
+      <div class="section-body">
+
+        <!-- ChurnSage -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon blue-icon">📉</div>
+            <div class="acc-info">
+              <div class="acc-name">ChurnSage <span class="badge badge-blue" style="margin-left:8px">ML Project</span></div>
+              <div class="acc-desc">Customer churn prediction for fintech using ensemble ML models with explainability layer.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--blue)">Ensemble</div>
+                <div class="acc-stat-lbl">Classification</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">ChurnSage is a fintech churn prediction system that identifies at-risk customers before they leave. Uses gradient boosting with SHAP-based explainability to surface the key drivers behind each prediction, enabling targeted retention campaigns.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Capabilities</div>
+                  <ul class="impact-list">
+                    <li>Binary and multi-class churn classification</li>
+                    <li>SHAP explainability for model transparency</li>
+                    <li>Feature importance dashboard</li>
+                    <li>Cohort-level risk segmentation</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">XGBoost</span><span class="tech-pill">SHAP</span><span class="tech-pill">Pandas</span><span class="tech-pill">Scikit-learn</span><span class="tech-pill">Plotly</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-blue">Machine Learning</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /ChurnSage -->
+
+        <!-- Recipe Recommendation -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon blue-icon">🍳</div>
+            <div class="acc-info">
+              <div class="acc-name">Recipe Recommendation <span class="badge badge-blue" style="margin-left:8px">ML Project</span></div>
+              <div class="acc-desc">Content-based recipe recommendation engine using NLP embeddings and ingredient similarity.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--blue)">NLP</div>
+                <div class="acc-stat-lbl">Similarity</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">A content-based filtering system that recommends recipes by encoding ingredient lists and cooking methods as dense vector embeddings, then ranking candidates by cosine similarity. Enables personalised meal discovery without requiring user history.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Capabilities</div>
+                  <ul class="impact-list">
+                    <li>Ingredient-level semantic similarity</li>
+                    <li>Cuisine and dietary filter support</li>
+                    <li>Real-time nearest-neighbour search via FAISS</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">Sentence-BERT</span><span class="tech-pill">FAISS</span><span class="tech-pill">Pandas</span><span class="tech-pill">Streamlit</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-blue">Machine Learning</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /Recipe -->
+
+        <!-- Movie Recommendation -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon blue-icon">🎬</div>
+            <div class="acc-info">
+              <div class="acc-name">Movie Recommendation <span class="badge badge-blue" style="margin-left:8px">ML Project</span></div>
+              <div class="acc-desc">Hybrid recommendation system combining collaborative filtering and content-based signals for movies.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--blue)">Hybrid</div>
+                <div class="acc-stat-lbl">Filtering</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">A hybrid recommendation engine that blends collaborative filtering (SVD matrix factorisation on user-rating matrices) with content-based signals (genre, director, cast embeddings) to surface personalised movie suggestions with strong cold-start handling.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Capabilities</div>
+                  <ul class="impact-list">
+                    <li>SVD collaborative filtering on user-item matrix</li>
+                    <li>Content signals via TF-IDF + metadata embeddings</li>
+                    <li>Ensemble blending for cold-start robustness</li>
+                    <li>Diversity and serendipity controls</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">Surprise</span><span class="tech-pill">SVD</span><span class="tech-pill">Scikit-learn</span><span class="tech-pill">TF-IDF</span><span class="tech-pill">Pandas</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-blue">Machine Learning</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /Movie -->
+
+      </div>
+    </div>
+  </div><!-- /section ml -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 4 — AUTOMATION
+  ══════════════════════════════════════════════════════════ -->
+  <div class="section-group open">
+    <div class="section-header">
+      <span class="section-icon">⚙️</span>
+      <div>
+        <div class="section-label" style="color:var(--orange)">4. Automation Tools</div>
+        <div class="section-sub">Tools and workflows that automate repetitive tasks</div>
+      </div>
+      <span class="section-chevron">▾</span>
+    </div>
+    <div class="section-body-wrap">
+      <div class="section-body">
+
+        <!-- Data Pipeline Automation -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="acc-icon orange-icon">🔄</div>
+            <div class="acc-info">
+              <div class="acc-name">Data Pipeline Automation <span class="badge badge-orange" style="margin-left:8px">Automation</span></div>
+              <div class="acc-desc">Automated data ingestion, cleaning, and reporting pipeline with scheduled execution and alerting.</div>
+            </div>
+            <div class="acc-meta">
+              <div class="acc-stat-mini">
+                <div class="acc-stat-val" style="color:var(--orange)">ETL</div>
+                <div class="acc-stat-lbl">Automated</div>
+              </div>
+              <span class="acc-arrow">▾</span>
+            </div>
+          </div>
+          <div class="accordion-body">
+            <div class="acc-content">
+              <div class="panel-grid">
+
+                <div class="panel-block full">
+                  <div class="block-label">Overview</div>
+                  <div class="block-text">A fully automated ETL pipeline for scheduled data ingestion from multiple sources, cleaning with validation rules, and report generation. Includes failure alerting and audit logging to ensure reliability without manual oversight.</div>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Key Capabilities</div>
+                  <ul class="impact-list">
+                    <li>Multi-source scheduled ingestion</li>
+                    <li>Data validation and quality gates</li>
+                    <li>Automated report delivery</li>
+                    <li>Slack alerting on failures</li>
+                  </ul>
+                </div>
+
+                <div class="panel-block">
+                  <div class="block-label">Tech Stack</div>
+                  <div class="tech-pills">
+                    <span class="tech-pill">Python</span><span class="tech-pill">Apache Airflow</span><span class="tech-pill">Pandas</span><span class="tech-pill">Great Expectations</span><span class="tech-pill">PostgreSQL</span>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="deploy-row">
+                    <span class="badge badge-orange">ETL Pipeline</span>
+                    <span class="badge badge-orange">Automation</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- /Pipeline -->
+
+      </div>
+    </div>
+  </div><!-- /section automation -->
+
+  <div class="footer-note">
+    <span>🚀</span> More projects coming soon
+  </div>
+
+</div><!-- /page -->
+
+<script src="js/project.js"></script>
+</body>
+</html>
