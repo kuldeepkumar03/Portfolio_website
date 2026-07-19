@@ -35,3 +35,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/* ===========================
+   Back Page Transition
+=========================== */
+
+const backLink = document.querySelector(".nav-back");
+
+if(backLink){
+
+    backLink.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        document.body.classList.add("page-transition");
+
+        setTimeout(() => {
+
+    window.location.href = "index.html";
+
+}, 500);
+
+    });
+
+}

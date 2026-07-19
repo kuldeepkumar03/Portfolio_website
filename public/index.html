@@ -3,14 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kuldeep Kumar — AI Systems Engineer building production ML at scale">
-  <title>Kuldeep Kumar — AI Systems Engineer</title>
+  <meta name="description" content="Kuldeep Kumar — Junior Data Scientist specializing in building production ML solutions">
+  <title>Kuldeep Kumar — Junior Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- ── ENTER SITE SPLASH ── -->
+  <div class="entry-splash" id="entrySplash">
+    <div class="entry-splash-orb-1"></div>
+    <div class="entry-splash-orb-2"></div>
+    <div class="entry-splash-grid"></div>
+    <div class="entry-splash-inner">
+      <div class="entry-splash-logo-wrap">
+        <span class="entry-splash-logo-ring"></span>
+        <div class="entry-splash-logo">
+          <span class="logo-k">K</span><span class="logo-k2">K</span>
+        </div>
+      </div>
+      <p class="entry-splash-name">Kuldeep Kumar</p>
+      <p class="entry-splash-role">Junior Data Scientist</p>
+      <button class="entry-splash-btn" id="entrySplashBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6v4h3l4 3V3L5 6H2z" fill="currentColor"/><path d="M11 5c1 .9 1.6 2 1.6 3s-.6 2.1-1.6 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span>let's Get Started</span>
+      </button>
+    </div>
+  </div>
 
   <!-- ── CURSOR ── -->
   <div class="cursor-dot" id="cursorDot"></div>
@@ -48,7 +69,7 @@
 
   <!-- ── HERO ── -->
   <section id="home" class="hero">
-    <video class="hero-bg-video" id="heroBgVideo" muted autoplay loop playsinline>
+    <video class="hero-bg-video" id="heroBgVideo" muted loop playsinline>
       <source src="videos/avatar.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -93,7 +114,18 @@
 
         <!-- RIGHT: AI Avatar Card -->
         <div class="hero-card-area" data-reveal data-delay="200">
-          <div class="ai-card floating">
+          <button class="avatar-toggle" id="avatarToggleBtn" aria-label="Open AI avatar panel" aria-expanded="false">
+            <span class="avatar-toggle-ring"></span>
+            <svg class="avatar-toggle-wave" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect class="wave-bar" x="1"  y="7" width="2" height="6"  rx="1" fill="currentColor"/>
+              <rect class="wave-bar" x="5"  y="4" width="2" height="12" rx="1" fill="currentColor"/>
+              <rect class="wave-bar" x="9"  y="1" width="2" height="18" rx="1" fill="currentColor"/>
+              <rect class="wave-bar" x="13" y="4" width="2" height="12" rx="1" fill="currentColor"/>
+              <rect class="wave-bar" x="17" y="7" width="2" height="6"  rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <div class="ai-card floating" id="aiCard">
             <div class="ai-card-top">
               <div class="ai-status">
                 <span class="pulse-dot"></span>
@@ -107,6 +139,9 @@
                 <button class="ctrl-btn" id="videoMuteBtn" title="Mute / Unmute">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="muteIcon"><path d="M2 5v4h3l4 3V2L5 5H2z" fill="currentColor"/><path d="M11 4.5c.8.7 1.3 1.7 1.3 2.5s-.5 1.8-1.3 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" id="unmuteIcon" style="display:none"><path d="M2 5v4h3l4 3V2L5 5H2z" fill="currentColor"/><path d="M10 5l3 3M13 5l-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                </button>
+                <button class="ctrl-btn" id="avatarCloseBtn" title="Close" aria-label="Close AI avatar panel">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
               </div>
             </div>
@@ -439,7 +474,7 @@
       <div class="projects-grid">
 
         <!-- P1 -->
-        <div class="project-card featured" data-reveal>
+        <div class="project-card featured edd-card" data-reveal>
           <div class="project-status prod">Production</div>
           <h3>EDD Prediction System</h3>
           <p class="project-desc">Multi-stage prediction architecture combining XGBoost ensembles with LightGBM buffering for reliable delivery estimates, leveraging historical trends, pattern intelligence, and adaptive model selection.</p>
@@ -475,26 +510,43 @@
 
 </div>
 
-          <div class="project-impact-row">
-    <div class="impact-pill">
-        <strong>XGBoost</strong>
-        Primary Model
+          <div class="feature-grid">
+
+    <div class="feature-item">
+        <span class="feature-icon">🚀</span>
+        <span>XGBoost Primary Model</span>
     </div>
 
-    <div class="impact-pill">
-        <strong>LightGBM</strong>
-        Buffer Layer
+    <div class="feature-item">
+        <span class="feature-icon">🛡️</span>
+        <span>LightGBM Buffer Layer</span>
     </div>
 
-    <div class="impact-pill">
-        <strong>Ensemble</strong>
-        Architecture
+    <div class="feature-item">
+        <span class="feature-icon">🔗</span>
+        <span>Ensemble Architecture</span>
     </div>
+
+    <div class="feature-item">
+        <span class="feature-icon">🔭</span>
+        <span>SigNoz Observability</span>
+    </div>
+
+    <div class="feature-item">
+        <span class="feature-icon">⚙️</span>
+        <span>Automated Model Retraining</span>
+    </div>
+
+    <div class="feature-item">
+        <span class="feature-icon">📊</span>
+        <span>High-Volume Inference Pipeline</span>
+    </div>
+
 </div>
 
-          <div class="project-impact-row">
-            <div class="impact-pill"><strong>90%+</strong> Accuracy</div>
-            <div class="impact-pill"><strong>15–20K</strong> Daily Predictions</div>
+          <div class="project-tags edd-tags">
+            <span>90%+ On-Ground Accuracy</span>
+            <span>Currently Serving 25–30K Daily Predictions</span>
           </div>
         </div>
 
@@ -502,8 +554,10 @@
         <div class="project-card" data-reveal data-delay="100">
           <div class="project-status prod">Production</div>
           <h3>DispatchIQ</h3>
-          <p class="project-desc">Dispatch intelligence platform delivering dispatch visibility,
-risk detection, GMV impact analysis, and EDD breach forecasting.</p>
+          <p class="project-desc">Provides clear visibility into dispatch operations and potential delivery risks.
+Highlights business impact by identifying delays that could affect GMV.
+Enables teams to act fast and reduce EDD breaches.
+</p>
 
           <div class="arch-flow">
             <div class="arch-node">Dispatch Monitoring</div>
@@ -617,117 +671,255 @@ empathetic, personalized mental wellness conversations.</p>
   <!-- ── SKILLS ── -->
   <section id="skills" class="section skills">
     <div class="container">
+      <div class="section-label">TECH STACK</div>
 
-      <div class="section-label">Skills</div>
-      <h2 class="section-heading">Tech I Work With</h2>
+        <h2 class="section-heading">
+            Technologies I Work With
+        </h2>
+      <p class="skills-subtitle">
+    Building production ML systems, AI applications, and scalable data
+    solutions using modern technologies.
+</p>
+<div class="skills-filter">
 
-      <div class="skills-layout">
+    <button class="filter-btn active" data-filter="all">
+        ⚡ All
+    </button>
 
-        <div class="skill-cols" data-reveal>
-          <div class="skill-col">
-            <h4 class="col-heading">Languages & Libraries</h4>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">Pandas</span>
-              <span class="tag">NumPy</span>
-              <span class="tag">Scikit-learn</span>
-            </div>
-          </div>
-          <div class="skill-col">
-            <h4 class="col-heading">ML & Modelling</h4>
-            <div class="tags">
-              <span class="tag">XGBoost</span>
-              <span class="tag">LightGBM</span>
-              <span class="tag">LSTM</span>
-              <span class="tag">ARIMA</span>
-            </div>
-          </div>
-          <div class="skill-col">
-            <h4 class="col-heading">Infrastructure</h4>
-            <div class="tags">
-              <span class="tag">AWS S3 / ECS</span>
-              <span class="tag">Docker</span>
-              <span class="tag">MongoDB</span>
-              <span class="tag">SQL</span>
-            </div>
-          </div>
-          <div class="skill-col">
-            <h4 class="col-heading">AI & LLMs</h4>
-            <div class="tags">
-              <span class="tag">RAG</span>
-              <span class="tag">OpenAI API</span>
-              <span class="tag">Gemini Pro</span>
-              <span class="tag">LangChain</span>
-            </div>
-          </div>
-          <div class="skill-col">
-            <h4 class="col-heading">Analytics</h4>
-            <div class="tags">
-              <span class="tag">Power BI</span>
-              <span class="tag">Metabase</span>
-              <span class="tag">Seaborn</span>
-              <span class="tag">Flask</span>
-            </div>
-          </div>
-        </div>
+    <button class="filter-btn" data-filter="programming">
+        &lt;/&gt; Programming
+    </button>
 
-        <div class="radar-wrap" data-reveal data-delay="150">
-          <div class="radar-label">Core Expertise</div>
-          <canvas id="radarChart" width="340" height="340"></canvas>
-        </div>
+    <button class="filter-btn" data-filter="ml">
+        🧠 ML / AI
+    </button>
 
-      </div>
+    <button class="filter-btn" data-filter="data">
+        🗄 Data
+    </button>
+
+    <button class="filter-btn" data-filter="cloud">
+        ☁ Cloud
+    </button>
+
+    <button class="filter-btn" data-filter="tools">
+        🛠 Tools
+    </button>
+
+</div>
+<div class="skills-grid">
+<div class="skill-card programming">
+
+    <div class="skill-icon">
+        &lt;/&gt;
     </div>
-  </section>
 
-  
+    <h3>Programming</h3>
 
-  <!-- ── TESTIMONIALS ── -->
-  <section class="section testimonials">
-    <div class="container">
-      <div class="section-label">Impact</div>
-      <h2 class="section-heading">What People Say</h2>
+    <p>
+        Core programming languages used to build scalable
+        AI applications.
+    </p>
 
-      <div class="testimonials-grid">
+    <div class="skill-tags">
 
-        <div class="t-card" data-reveal>
-          <div class="t-stars">★★★★★</div>
-          <p>"Kuldeep played a key role in building our in-house ML systems from scratch. Accuracy and ownership are exceptional."</p>
-          <div class="t-author">
-            <div class="t-avatar">CS</div>
-            <div>
-              <strong>Chris Samuel</strong>
-              <span>Lead, ShipDelight</span>
-            </div>
-          </div>
-        </div>
+        <span>Python</span>
+        <span>SQL</span>
+        <span>Pandas</span>
+        <span>NumPy</span>
+        <span>FastAPI</span>
 
-        <div class="t-card featured" data-reveal data-delay="100">
-          <div class="t-stars">★★★★★</div>
-          <p>"DispatchIQ completely changed how we track delays and risk. The insights are accurate and scale to real-time production."</p>
-          <div class="t-author">
-            <div class="t-avatar">OM</div>
-            <div>
-              <strong>Ops Manager</strong>
-              <span>Logistics Client</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="t-card" data-reveal data-delay="200">
-          <div class="t-stars">★★★★★</div>
-          <p>"Kuldeep is not just a coder — he thinks about business impact. Every insight drives the iteration forward."</p>
-          <div class="t-author">
-            <div class="t-avatar">TL</div>
-            <div>
-              <strong>Tech Lead</strong>
-              <span>VBluid Tech</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
+
+    <div class="skill-footer">
+
+        <span>5 Technologies</span>
+
+        <span>Used in 6 Projects</span>
+
+    </div>
+
+</div>
+<div class="skill-card ml">
+
+    <div class="skill-icon">
+        🧠
+    </div>
+
+    <h3>Machine Learning</h3>
+
+    <p>
+        Libraries and frameworks used for predictive
+        modelling.
+    </p>
+
+    <div class="skill-tags">
+
+        <span>CatBoost</span>
+        <span>XGBoost</span>
+        <span>LightGBM</span>
+        <span>Scikit-Learn</span>
+        <span>Optuna</span>
+
+    </div>
+
+    <div class="skill-footer">
+
+        <span>5 Technologies</span>
+
+        <span>Production Models</span>
+
+    </div>
+
+</div>
+<div class="skill-card data">
+
+    <div class="skill-icon">
+        🗄
+    </div>
+
+    <h3>Data Engineering</h3>
+
+    <p>
+        Data processing and feature engineering tools.
+    </p>
+
+    <div class="skill-tags">
+
+        <span>Pandas</span>
+        <span>NumPy</span>
+        <span>PySpark</span>
+        <span>MongoDB</span>
+
+    </div>
+
+    <div class="skill-footer">
+
+        <span>4 Technologies</span>
+
+        <span>Production Pipelines</span>
+
+    </div>
+
+</div>
+<div class="skill-card cloud">
+
+    <div class="skill-icon">
+        ☁
+    </div>
+
+    <h3>Cloud & Deployment</h3>
+
+    <p>
+        Deployment and cloud infrastructure for ML systems.
+    </p>
+
+    <div class="skill-tags">
+
+        <span>AWS EC2</span>
+        <span>AWS S3</span>
+        <span>Docker</span>
+        <span>Render</span>
+
+    </div>
+
+    <div class="skill-footer">
+
+        <span>4 Technologies</span>
+
+        <span>Production Ready</span>
+
+    </div>
+
+</div>
+<div class="skill-card ai">
+
+    <div class="skill-icon">
+        🤖
+    </div>
+
+    <h3>AI & LLM</h3>
+
+    <p>
+        Modern AI frameworks and APIs powering intelligent
+        applications.
+    </p>
+
+    <div class="skill-tags">
+
+        <span>OpenAI API</span>
+        <span>Gemini</span>
+        <span>LangChain</span>
+        <span>RAG</span>
+        <span>n8n</span>
+
+    </div>
+
+    <div class="skill-footer">
+
+        <span>5 Technologies</span>
+
+        <span>AI Automation</span>
+
+    </div>
+
+</div>
+<div class="skill-card visualization">
+
+    <div class="skill-icon">
+        📊
+    </div>
+
+    <h3>Visualization</h3>
+
+    <p>
+        BI dashboards and analytics tools for decision making.
+    </p>
+
+    <div class="skill-tags">
+
+        <span>Power BI</span>
+        <span>Matplotlib</span>
+        <span>Seaborn</span>
+        <span>Excel</span>
+
+    </div>
+
+    <div class="skill-footer">
+
+        <span>4 Technologies</span>
+
+        <span>Business Intelligence</span>
+
+    </div>
+
+</div>
+</div>
+      
+    <div class="skills-summary">
+
+    <div class="summary-item">
+        <strong>20+</strong>
+        <span>Technologies</span>
+    </div>
+
+    <div class="summary-item">
+        <strong>5+</strong>
+        <span>Projects</span>
+    </div>
+
+    <div class="summary-item">
+        <strong>Production</strong>
+        <span>Ready</span>
+    </div>
+
+    <div class="summary-item">
+        <strong>Always</strong>
+        <span>Learning</span>
+    </div>
+
+</div>
+</div>
   </section>
 
   <!-- ── CONTACT ── -->
@@ -738,11 +930,24 @@ empathetic, personalized mental wellness conversations.</p>
         <h2>Let's Build Something<br><span class="gradient-text">Great Together</span></h2>
         <p class="contact-sub">Whether it's a senior ML role, a consulting project, or just a chat about AI systems — my inbox is open.</p>
         <div class="contact-actions">
-          <a href="mailto:kuldeep@example.com" class="btn btn-primary">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=deepkul2002@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
             Say Hello
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </a>
-          <a href="https://linkedin.com/in/kuldeep-kumar1207" target="_blank" class="btn btn-ghost">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/kuldeepkumar1207/" target="_blank" class="btn btn-ghost">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -754,13 +959,13 @@ empathetic, personalized mental wellness conversations.</p>
       <div class="footer-inner">
         <div class="footer-brand">
           <span class="logo-k">K</span><span class="logo-k2">K</span>
-          <span class="footer-tagline">AI Systems Engineer</span>
+          <span class="footer-tagline">Junior Data Scientist</span>
         </div>
         <div class="footer-links">
-          <a href="mailto:kuldeep@example.com">kuldeep@example.com</a>
-          <a href="tel:+918045638514">+91 80456 38514</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
+          <a href="mailto:deepkul2002@gmail.com">deepkul2002@gmail.com</a>
+          <a href="https://medium.com/@deepkul2002" target="_blank">Medium Blogs</a>
+          <a href="https://www.linkedin.com/in/kuldeepkumar1207/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/kuldeepkumar03" target="_blank">GitHub</a>
         </div>
         <p class="footer-copy">© 2025 Kuldeep Kumar</p>
       </div>

@@ -1,5 +1,5 @@
 /* ── Premium Portfolio Script ── */
-
+history.scrollRestoration = "manual";
 // ══════════════════════════════════════
 // ELECTRIC LIGHTNING CURSOR
 // ══════════════════════════════════════
@@ -247,34 +247,89 @@ const pauseIcon     = document.getElementById('pauseIcon');
 const muteIcon      = document.getElementById('muteIcon');
 const unmuteIcon    = document.getElementById('unmuteIcon');
 
+function syncPlayPauseIcon() {
+  if (!video || !playIcon || !pauseIcon) return;
+  playIcon.style.display  = video.paused ? '' : 'none';
+  pauseIcon.style.display = video.paused ? 'none' : '';
+  visualizer?.classList.toggle('paused', video.paused);
+}
+
+function syncMuteIcon() {
+  if (!video || !muteIcon || !unmuteIcon) return;
+  muteIcon.style.display   = video.muted ? 'none' : '';
+  unmuteIcon.style.display = video.muted ? '' : 'none';
+}
+
 if (playPauseBtn && video) {
   playPauseBtn.addEventListener('click', () => {
     if (video.paused) {
       video.play();
-      visualizer?.classList.remove('paused');
-      playIcon.style.display  = 'none';
-      pauseIcon.style.display = '';
     } else {
       video.pause();
-      visualizer?.classList.add('paused');
-      playIcon.style.display  = '';
-      pauseIcon.style.display = 'none';
     }
   });
-  // start paused = play icon shown, set pause on autoplay
-  if (!video.paused) {
-    playIcon.style.display  = 'none';
-    pauseIcon.style.display = '';
-  }
+  video.addEventListener('play', syncPlayPauseIcon);
+  video.addEventListener('pause', syncPlayPauseIcon);
+  syncPlayPauseIcon();
 }
 
 if (muteBtn && video) {
   muteBtn.addEventListener('click', () => {
     video.muted = !video.muted;
-    muteIcon.style.display   = video.muted ? 'none' : '';
-    unmuteIcon.style.display = video.muted ? ''     : 'none';
+    syncMuteIcon();
+  });
+  syncMuteIcon();
+}
+
+// ── ENTER SITE SPLASH
+const entrySplash    = document.getElementById('entrySplash');
+const entrySplashBtn = document.getElementById('entrySplashBtn');
+
+if (entrySplash) {
+  document.body.style.overflow = 'hidden';
+
+  entrySplashBtn?.addEventListener('click', () => {
+    entrySplash.classList.add('entered');
+    document.body.style.overflow = '';
+
+    // Real user gesture — start fresh from the beginning, with sound.
+    if (video) {
+      video.currentTime = 0;
+      video.muted = false;
+      video.play();
+      syncMuteIcon();
+      syncPlayPauseIcon();
+    }
   });
 }
+
+// ── AI AVATAR TOGGLE (round button ⇄ expanded card)
+const avatarToggleBtn = document.getElementById('avatarToggleBtn');
+const aiCard           = document.getElementById('aiCard');
+const avatarCloseBtn   = document.getElementById('avatarCloseBtn');
+
+function openAvatarCard() {
+  aiCard?.classList.add('open');
+  avatarToggleBtn?.classList.add('hidden');
+  avatarToggleBtn?.setAttribute('aria-expanded', 'true');
+
+  // First real user gesture — safe to unmute and (re)start audio here.
+  if (video) {
+    video.muted = false;
+    video.play();
+    syncMuteIcon();
+    syncPlayPauseIcon();
+  }
+}
+
+function closeAvatarCard() {
+  aiCard?.classList.remove('open');
+  avatarToggleBtn?.classList.remove('hidden');
+  avatarToggleBtn?.setAttribute('aria-expanded', 'false');
+}
+
+avatarToggleBtn?.addEventListener('click', openAvatarCard);
+avatarCloseBtn?.addEventListener('click', closeAvatarCard);
 
 // ── EXPERIENCE CAROUSEL (desktop grid, dots for mobile)
 const expCards    = document.querySelectorAll('.exp-card');
@@ -446,3 +501,55 @@ window.addEventListener('load', () => {
 window.addEventListener('error', e => console.error('[Portfolio] Error:', e.error));
 
 console.log('[Portfolio] v2.0 — Premium Edition loaded');
+// Restore scroll position
+window.addEventListener("pageshow", () => {
+
+    document.body.classList.remove("page-transition");
+
+    overlay.classList.remove("active");
+
+    const savedScroll = sessionStorage.getItem("portfolioScroll");
+
+    if(savedScroll){
+
+        requestAnimationFrame(() => {
+            window.scrollTo(0, parseInt(savedScroll));
+        });
+
+        sessionStorage.removeItem("portfolioScroll");
+    }
+
+});
+
+/* ===========================
+   PAGE TRANSITION
+=========================== */
+
+const overlay = document.createElement("div");
+overlay.className = "page-transition-overlay";
+document.body.appendChild(overlay);
+
+document.querySelectorAll('a[href="projects.html"]').forEach(link => {
+
+    link.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        // Save current scroll position
+        sessionStorage.setItem(
+            "portfolioScroll",
+            window.scrollY
+        );
+
+        overlay.classList.add("active");
+        document.body.classList.add("page-transition");
+
+        const destination = this.href;
+
+        setTimeout(() => {
+            window.location.assign(destination);
+        },900);
+
+    });
+
+});
