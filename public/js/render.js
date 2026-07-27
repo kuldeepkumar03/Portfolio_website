@@ -41,17 +41,19 @@ export function updateMeta(data) {
   $('meta[property="og:title"]')?.setAttribute('content', meta.title);
   $('meta[property="og:description"]')?.setAttribute('content', meta.ogDescription);
   $('meta[name="theme-color"]')?.setAttribute('content', meta.themeColor);
-  $('.logo__mark').textContent = person.initials;
+  $('.nav__logo-mark').textContent = person.initials;
   const icon = person.favicon || 'favicon.svg';
   document.querySelector('link[rel="icon"]')?.setAttribute('href', icon);
   document.querySelector('link[rel="apple-touch-icon"]')?.setAttribute('href', icon);
 }
 
 export function renderNav(data) {
-  const nav = $('#navLinks');
-  nav.innerHTML = data.nav.map(n =>
+  const pill = $('#navPill');
+  if (!pill) return;
+  pill.innerHTML = data.nav.map(n =>
     `<a href="#${n.id}" class="nav__link" data-section="${n.id}">${esc(n.label)}</a>`
   ).join('') + '<span class="nav__indicator" id="navIndicator" aria-hidden="true"></span>';
+  $('.nav__logo-mark').textContent = data.person.initials;
   $('#resumeBtn')?.setAttribute('href', data.person.resume);
 }
 

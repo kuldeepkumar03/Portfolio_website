@@ -31,11 +31,11 @@ async function loadWriting(data) {
 
 /* ── Scroll progress ── */
 function initScrollProgress() {
-  const bar = $('#scrollProgress');
-  if (!bar) return;
+  const fill = $('#scrollProgressFill');
+  if (!fill) return;
   const update = () => {
     const max = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    fill.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
   };
   addEventListener('scroll', update, { passive: true });
   update();
@@ -193,7 +193,8 @@ function initNav() {
 
   const moveIndicator = (link) => {
     const indicator = $('#navIndicator');
-    if (!indicator || !link || innerWidth <= 768) {
+    const pill = $('#navPill');
+    if (!indicator || !link || !pill || innerWidth <= 768) {
       indicator?.style.setProperty('opacity', '0');
       return;
     }
@@ -477,8 +478,9 @@ function initBackToTop() {
   if (!btn) return;
   addEventListener('scroll', () => {
     const show = scrollY > innerHeight * 0.6;
-    btn.hidden = !show;
     btn.classList.toggle('is-visible', show);
+    btn.setAttribute('aria-hidden', String(!show));
+    btn.tabIndex = show ? 0 : -1;
   }, { passive: true });
   btn.addEventListener('click', () => scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }));
 }
@@ -523,7 +525,7 @@ function initInteractions() {
   initFlowNodes();
   initTerminalWidget();
   initEasterEgg(portfolioData);
-  if (!prefersReducedMotion) document.body.classList.add('is-loaded');
+  document.body.classList.add('is-loaded');
 }
 
 async function boot() {
