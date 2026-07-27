@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "title": "Kuldeep Kumar | Junior Data Scientist",
+    "description": "Kuldeep Kumar — Junior Data Scientist building production ML systems at scale",
+    "ogDescription": "Production ML pipelines, dispatch intelligence, and AI systems at 20–30K shipments daily.",
+    "themeColor": "#0c0f14",
+    "year": 2026
+  },
+
+  "person": {
+    "name": "Kuldeep Kumar",
+    "initials": "KK",
+    "title": "Junior Data Scientist",
+    "favicon": "favicon.svg",
+    "email": "deepkul2002@gmail.com",
+    "resume": "resume.pdf",
+    "video": "videos/avatar.mp4",
+    "videoVolume": 1
+  },
+
+  "social": [
+    { "label": "GitHub", "url": "https://github.com/kuldeepkumar03" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/kuldeepkumar1207/" },
+    { "label": "Medium", "url": "https://medium.com/@deepkul2002" }
+  ],
+
+  "nav": [
+    { "id": "about", "label": "About" },
+    { "id": "experience", "label": "Experience" },
+    { "id": "projects", "label": "Projects" },
+    { "id": "writing", "label": "Writing" },
+    { "id": "contact", "label": "Contact" }
+  ],
+
+  "hero": {
+    "eyebrow": "Junior Data Scientist · Production ML · ShipDelight",
+    "headline": "Turning raw data into",
+    "headlineAccent": "intelligent systems",
+    "description": "I build and deploy ML pipelines that power real decisions — delivery prediction, dispatch intelligence, and risk modeling at <strong>20–30K shipments daily</strong>.",
+    "cta": [
+      { "label": "View Projects", "href": "#projects", "style": "primary" },
+      { "label": "Get in Touch", "href": "#contact", "style": "ghost" }
+    ],
+    "metrics": [
+      { "value": 30, "suffix": "K+", "label": "Daily Predictions" },
+      { "value": 90, "suffix": "%+", "label": "Model Accuracy" },
+      { "value": 5, "suffix": "+", "label": "Production Systems" }
+    ],
+    "ticker": ["Python", "XGBoost", "LightGBM", "PySpark", "FastAPI", "AWS", "Docker", "LangChain", "RAG", "MongoDB", "Optuna", "Scikit-learn"]
+  },
+
+  "terminal": {
+    "filename": "inference_pipeline.py",
+    "lines": [
+      { "type": "cmd", "text": "python deploy_model.py --env prod" },
+      { "type": "dim", "text": "Loading XGBoost ensemble [3M, 1M, 15D]..." },
+      { "type": "dim", "text": "Feature store connected ✓" },
+      { "type": "accent", "text": "Inference latency: 12ms p99" },
+      { "type": "live", "text": "Serving predictions today" }
+    ]
+  },
+
+  "easterEgg": {
+    "unlockCommands": ["debug", "konami", "sudo debug"]
+  },
+
+  "about": {
+    "tag": "About",
+    "title": "From student to",
+    "titleBreak": "AI systems builder",
+    "paragraphs": [
+      "I joined ShipDelight when prediction systems were outsourced. We rebuilt everything in-house — from delivery prediction and analytics to risk intelligence and customer communication. Today, these systems power thousands of decisions every day.",
+      "I transform complex data into scalable ML systems that deliver measurable outcomes."
+    ],
+    "timeline": [
+      { "date": "Oct 2024 — Present", "role": "Junior Data Scientist", "org": "ShipDelight — Production ML at scale", "active": true },
+      { "date": "2024", "role": "AI Engineer Intern", "org": "VBluid Tech — LLMs & RAG systems" },
+      { "date": "2023", "role": "Data Science Intern", "org": "iNeuron.ai — Feature engineering, analytics" },
+      { "date": "2020", "role": "B.Tech — Computer Science", "org": "Started the ML obsession" }
+    ]
+  },
+
+  "experience": {
+    "tag": "Background",
+    "title": "Experience & expertise",
+    "subtitle": "Production roles and the stack behind them.",
+    "workTitle": "Where I've worked",
+    "workHint": "Roles, companies & impact",
+    "techTitle": "Technologies I work with",
+    "techHint": "Languages, frameworks & tools",
+    "items": [
+      {
+        "dates": "Oct 2024 — Present",
+        "org": "ShipDelight",
+        "role": "Junior Data Scientist",
+        "description": "Leading production ML — delivery prediction, dispatch intelligence, risk modelling. Own the pipeline end-to-end.",
+        "tech": ["XGBoost", "LightGBM", "AWS"]
+      },
+      {
+        "dates": "Feb 2024 — Oct 2024",
+        "org": "ShipDelight",
+        "role": "Frontend Engineer",
+        "description": "Shipped secure internal dashboards and operational tools used daily by the ops team.",
+        "tech": ["React", "Internal Tools"]
+      },
+      {
+        "dates": "Jun 2023 — Aug 2024",
+        "org": "VBluid Tech",
+        "role": "AI Engineering Intern",
+        "description": "Built LLM-powered features with OpenAI, LangChain, and optimised retrieval for RAG pipelines.",
+        "tech": ["OpenAI", "RAG", "Python"]
+      },
+      {
+        "dates": "Nov 2022 — Nov 2023",
+        "org": "Final Year Project",
+        "role": "ML Engineer",
+        "description": "Deep dive into feature engineering, data analysis and model building on real-world datasets.",
+        "tech": ["Python", "Scikit-learn"]
+      }
+    ]
+  },
+
+  "projects": {
+    "tag": "Projects",
+    "title": "Featured work",
+    "subtitle": "Production ML systems, AI applications, and machine learning solutions built to solve real business problems.",
+    "featured": [
+      {
+        "name": "EDD Prediction System",
+        "badge": "production",
+        "description": "Multi-stage prediction architecture combining XGBoost ensembles with LightGBM buffering for reliable delivery estimates at scale.",
+        "image": "images/projects/edd-chart.svg",
+        "imageAlt": "EDD model accuracy chart",
+        "flow": [
+          { "label": "XGBoost", "sub": "3M · 1M · 15D" },
+          { "label": "Routing", "sub": "Engine" },
+          { "label": "LightGBM", "sub": "Buffer" },
+          { "label": "Final EDD", "highlight": true }
+        ],
+        "metrics": [
+          { "value": "90%+", "label": "On-Ground Accuracy" },
+          { "value": "25–30K", "label": "Daily Predictions" },
+          { "value": "3", "label": "Time Horizons" }
+        ],
+        "tech": ["Python", "PySpark", "XGBoost", "LightGBM", "MongoDB", "AWS"],
+        "links": {
+          "github": "https://github.com/kuldeepkumar03",
+          "demo": null
+        }
+      },
+      {
+        "name": "DispatchIQ",
+        "badge": "production",
+        "description": "Real-time dispatch intelligence — risk scoring, GMV protection, and courier recommendations across 6 integrated modules.",
+        "image": "images/projects/dispatch-chart.svg",
+        "imageAlt": "Dispatch risk scoring dashboard",
+        "flow": [
+          { "label": "Monitoring" },
+          { "label": "Risk Intel" },
+          { "label": "GMV Guard", "highlight": true }
+        ],
+        "metrics": [],
+        "tech": ["Python", "LightGBM", "FastAPI", "Redis", "Docker"],
+        "links": {
+          "github": "https://github.com/kuldeepkumar03",
+          "demo": null
+        }
+      },
+      {
+        "name": "Therapy Connect",
+        "badge": "genai",
+        "description": "AI therapy assistant with voice understanding, emotion intelligence, and RAG-powered contextual memory.",
+        "image": "images/projects/therapy-chart.svg",
+        "imageAlt": "Therapy Connect RAG pipeline",
+        "flow": [
+          { "label": "Voice" },
+          { "label": "Emotion AI" },
+          { "label": "Response", "highlight": true }
+        ],
+        "metrics": [],
+        "tech": ["LangChain", "OpenAI", "Whisper", "FAISS", "FastAPI"],
+        "links": {
+          "github": "https://github.com/kuldeepkumar03",
+          "demo": null
+        }
+      }
+    ],
+    "more": [
+      {
+        "category": "Generative AI",
+        "items": [
+          {
+            "name": "MLTE — Multilingual Text Enhancer",
+            "description": "Multilingual NLP pipeline for text enhancement, summarization, and simplification using transformer models across 10+ languages.",
+            "tech": ["HuggingFace", "Transformers", "BART", "Streamlit"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          },
+          {
+            "name": "LinkedIn Automation",
+            "description": "LLM-powered content generation and scheduling via n8n workflow orchestration — topic ingestion to scheduled posting.",
+            "tech": ["n8n", "OpenAI", "LinkedIn API"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          }
+        ]
+      },
+      {
+        "category": "Machine Learning",
+        "items": [
+          {
+            "name": "ChurnSage",
+            "description": "Fintech churn prediction with gradient boosting and SHAP explainability for targeted retention campaigns.",
+            "tech": ["XGBoost", "SHAP", "Plotly"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          },
+          {
+            "name": "Recipe Recommendation",
+            "description": "Content-based filtering using ingredient embeddings and FAISS nearest-neighbour search for personalised meal discovery.",
+            "tech": ["Sentence-BERT", "FAISS", "Streamlit"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          },
+          {
+            "name": "Movie Recommendation",
+            "description": "Hybrid engine blending SVD collaborative filtering with content-based signals for cold-start robustness.",
+            "tech": ["Surprise", "SVD", "TF-IDF"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          }
+        ]
+      },
+      {
+        "category": "Automation",
+        "items": [
+          {
+            "name": "Data Pipeline Automation",
+            "description": "Automated ETL with scheduled ingestion, Great Expectations validation, and Slack alerting on failures.",
+            "tech": ["Airflow", "Great Expectations", "PostgreSQL"],
+            "links": { "github": "https://github.com/kuldeepkumar03" }
+          }
+        ]
+      }
+    ]
+  },
+
+  "skills": {
+    "tag": "Tech Stack",
+    "title": "Technologies I work with",
+    "filters": [
+      { "id": "all", "label": "All" },
+      { "id": "programming", "label": "Programming" },
+      { "id": "ml", "label": "ML / AI" },
+      { "id": "data", "label": "Data" },
+      { "id": "cloud", "label": "Cloud" },
+      { "id": "tools", "label": "Tools" }
+    ],
+    "categories": [
+      {
+        "id": "programming",
+        "title": "Programming",
+        "description": "Core languages for scalable AI applications.",
+        "tech": ["Python", "SQL", "Pandas", "NumPy", "FastAPI"]
+      },
+      {
+        "id": "ml",
+        "title": "Machine Learning",
+        "description": "Predictive modelling libraries and frameworks.",
+        "tech": ["XGBoost", "LightGBM", "CatBoost", "Scikit-Learn", "Optuna"]
+      },
+      {
+        "id": "data",
+        "title": "Data Engineering",
+        "description": "Processing and feature engineering at scale.",
+        "tech": ["PySpark", "MongoDB", "Pandas", "NumPy"]
+      },
+      {
+        "id": "cloud",
+        "title": "Cloud & Deployment",
+        "description": "Infrastructure for production ML systems.",
+        "tech": ["AWS EC2", "AWS S3", "Docker", "Render"]
+      },
+      {
+        "id": "ml",
+        "title": "AI & LLM",
+        "description": "Modern AI frameworks and intelligent apps.",
+        "tech": ["OpenAI", "LangChain", "RAG", "Gemini", "n8n"]
+      },
+      {
+        "id": "tools",
+        "title": "Visualization",
+        "description": "BI dashboards and analytics for decisions.",
+        "tech": ["Power BI", "Matplotlib", "Seaborn", "Excel"]
+      }
+    ]
+  },
+
+  "writing": {
+    "tag": "Writing",
+    "title": "Articles & notes",
+    "subtitle": "Thoughts on ML engineering, production systems, and data science.",
+    "mediumUsername": "deepkul2002",
+    "fallbackArticles": [
+      {
+        "title": "Building Production ML Pipelines That Scale",
+        "url": "https://medium.com/@deepkul2002",
+        "date": "2025",
+        "readTime": "8 min read"
+      },
+      {
+        "title": "From Jupyter Notebook to Deployed Model",
+        "url": "https://medium.com/@deepkul2002",
+        "date": "2024",
+        "readTime": "6 min read"
+      },
+      {
+        "title": "RAG Systems in Production: Lessons Learned",
+        "url": "https://medium.com/@deepkul2002",
+        "date": "2024",
+        "readTime": "10 min read"
+      }
+    ]
+  },
+
+  "contact": {
+    "tag": "Open to opportunities",
+    "title": "Let's build something",
+    "titleAccent": "great together",
+    "description": "Whether it's an ML role, a consulting project, or a chat about AI systems — my inbox is open.",
+    "formAction": "https://formspree.io/f/xplaceholder",
+    "formNote": "Replace formAction in portfolio.json with your Formspree endpoint to enable the contact form.",
+    "cta": [
+      { "label": "Say Hello", "url": "mailto:deepkul2002@gmail.com", "style": "primary" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/kuldeepkumar1207/", "style": "ghost" }
+    ]
+  }
+}

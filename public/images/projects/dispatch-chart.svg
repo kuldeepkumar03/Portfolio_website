@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" fill="none">
+  <rect width="480" height="200" rx="12" fill="#141820"/>
+  <text x="24" y="32" fill="#5c6678" font-family="monospace" font-size="11">Dispatch Risk Score Distribution</text>
+  <path d="M40 140 C90 120, 120 60, 180 80 S280 150, 340 70 S400 40, 440 90" stroke="#3b9eff" stroke-width="2" fill="none"/>
+  <path d="M40 140 C90 120, 120 60, 180 80 S280 150, 340 70 S400 40, 440 90 L440 160 L40 160 Z" fill="url(#g)" opacity="0.3"/>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3b9eff"/><stop offset="1" stop-color="#3b9eff" stop-opacity="0"/></linearGradient></defs>
+  <circle cx="340" cy="70" r="5" fill="#34d399"/>
+  <text x="352" y="74" fill="#34d399" font-family="monospace" font-size="11">Low risk route</text>
+</svg>
