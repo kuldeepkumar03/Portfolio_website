@@ -41,7 +41,7 @@ export function updateMeta(data) {
   $('meta[property="og:title"]')?.setAttribute('content', meta.title);
   $('meta[property="og:description"]')?.setAttribute('content', meta.ogDescription);
   $('meta[name="theme-color"]')?.setAttribute('content', meta.themeColor);
-  $('.nav__logo-mark').textContent = person.initials;
+  $('#navLogo')?.setAttribute('src', person.logo || person.favicon || 'images/logo.svg');
   const icon = person.favicon || 'favicon.svg';
   document.querySelector('link[rel="icon"]')?.setAttribute('href', icon);
   document.querySelector('link[rel="apple-touch-icon"]')?.setAttribute('href', icon);
@@ -50,10 +50,15 @@ export function updateMeta(data) {
 export function renderNav(data) {
   const pill = $('#navPill');
   if (!pill) return;
-  pill.innerHTML = data.nav.map(n =>
-    `<a href="#${n.id}" class="nav__link" data-section="${n.id}">${esc(n.label)}</a>`
+  pill.innerHTML = data.nav.map((n, i) =>
+    `<a href="#${n.id}" class="nav__link" data-section="${n.id}">
+      <span class="nav__link-index">${String(i + 1).padStart(2, '0')}</span>
+      <span class="nav__link-label">${esc(n.label)}</span>
+    </a>`
   ).join('') + '<span class="nav__indicator" id="navIndicator" aria-hidden="true"></span>';
-  $('.nav__logo-mark').textContent = data.person.initials;
+  $('#navLogo')?.setAttribute('src', data.person.logo || data.person.favicon || 'images/logo.svg');
+  $('#navBrandName').textContent = data.person.name;
+  $('#navBrandRole').textContent = data.person.title;
   $('#resumeBtn')?.setAttribute('href', data.person.resume);
 }
 

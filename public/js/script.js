@@ -44,19 +44,74 @@ function initScrollProgress() {
 /* ── Custom cursor ── */
 function initCursor() {
   const cursor = $('#cursor');
-  if (!cursor || isTouch) return;
+  const dot = cursor?.querySelector('.cursor__dot');
+  const ring = cursor?.querySelector('.cursor__ring');
+  if (!cursor || !dot || !ring || isTouch) return;
+
   document.body.classList.add('has-cursor');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    const hover = document.elementFromPoint(mx, my)?.closest('a, button, .btn, summary, .project-card, .skill-card, .writing-card');
+
+  let mx = 0;
+  let my = 0;
+  let dx = 0;
+  let dy = 0;
+  let rx = 0;
+  let ry = 0;
+  let visible = false;
+  let scrolling = false;
+  let scrollTimer;
+
+  const lerp = (current, target, factor) => current + (target - current) * factor;
+
+  addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    if (!visible) {
+      dx = mx;
+      dy = my;
+      rx = mx;
+      ry = my;
+      visible = true;
+      cursor.classList.remove('is-hidden');
+    }
+    const hover = document.elementFromPoint(mx, my)?.closest(
+      'a, button, .btn, summary, .project-card, .skill-card, .writing-card, .nav__link'
+    );
     cursor.classList.toggle('is-hover', !!hover);
-  });
+  }, { passive: true });
+
+  addEventListener('mouseleave', () => {
+    visible = false;
+    cursor.classList.add('is-hidden');
+  }, { passive: true });
+
+  addEventListener('scroll', () => {
+    scrolling = true;
+    cursor.classList.add('is-scrolling');
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      scrolling = false;
+      cursor.classList.remove('is-scrolling');
+    }, 150);
+  }, { passive: true });
+
   const tick = () => {
-    rx += (mx - rx) * 0.18; ry += (my - ry) * 0.15;
-    cursor.style.transform = `translate(${rx}px, ${ry}px)`;
+    const dist = Math.hypot(mx - rx, my - ry);
+    const dotFactor = scrolling ? 0.65 : 0.45;
+    const ringBase = scrolling ? 0.32 : 0.14;
+    const ringFactor = Math.min(0.5, ringBase + dist * 0.0018);
+
+    dx = lerp(dx, mx, dotFactor);
+    dy = lerp(dy, my, dotFactor);
+    rx = lerp(rx, mx, ringFactor);
+    ry = lerp(ry, my, ringFactor);
+
+    dot.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+
     requestAnimationFrame(tick);
   };
+
+  cursor.classList.add('is-hidden');
   tick();
 }
 

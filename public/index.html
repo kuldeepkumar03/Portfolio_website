@@ -39,7 +39,11 @@
       <div class="nav__inner">
         <a href="#home" class="nav__brand" data-scroll="home" aria-label="Kuldeep Kumar — Home">
           <span class="nav__logo" aria-hidden="true">
-            <span class="nav__logo-mark">KK</span>
+            <img class="nav__logo-img" id="navLogo" src="images/logo.svg" alt="" width="40" height="40">
+          </span>
+          <span class="nav__brand-text">
+            <span class="nav__brand-name" id="navBrandName"></span>
+            <span class="nav__brand-role" id="navBrandRole"></span>
           </span>
         </a>
 
@@ -48,7 +52,12 @@
         </nav>
 
         <div class="nav__actions">
-          <a href="resume.pdf" class="btn btn--outline btn--sm nav__resume" id="resumeBtn" target="_blank" rel="noopener">Resume</a>
+          <a href="resume.pdf" class="btn btn--nav-resume nav__resume" id="resumeBtn" target="_blank" rel="noopener">
+            <span>Resume</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
           <button class="nav__toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
           </button>

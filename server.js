@@ -21,8 +21,9 @@ app.get('/api/writing', async (req, res) => {
 });
 
 if (require.main === module) {
-  app.listen(3000, () => {
-    console.log('Portfolio website running at http://localhost:3000');
+  const server = app.listen(0, () => {
+    const { port } = server.address();
+    console.log(`Portfolio website running at http://localhost:${port}`);
   });
 }
 
