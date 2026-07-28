@@ -4,6 +4,7 @@
 import { renderSite, renderWriting } from './render.js';
 import { initEasterEgg } from './easter-egg.js';
 import { initTerminalWidget } from './terminal-widget.js';
+import { initSiteTheme } from './site-theme.js';
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
@@ -585,6 +586,7 @@ function initInteractions() {
 
 async function boot() {
   try {
+    initSiteTheme();
     portfolioData = await loadPortfolio();
     renderSite(portfolioData);
     const articles = await loadWriting(portfolioData);

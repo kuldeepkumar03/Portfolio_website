@@ -1,0 +1,400 @@
+/* ═══════════════════════════════════════════════════════════
+   Site Themes — full redesign via data-site-theme on <html>
+═══════════════════════════════════════════════════════════ */
+
+html[data-site-theme] {
+  transition: background-color 0.5s ease, color 0.4s ease;
+}
+
+body.site-theme-switching {
+  animation: theme-flash 0.65s ease;
+}
+
+@keyframes theme-flash {
+  0%, 100% { filter: none; }
+  35% { filter: brightness(1.35) saturate(1.25) hue-rotate(8deg); }
+  70% { filter: brightness(0.95); }
+}
+
+/* ── Synthwave ── */
+[data-site-theme="synthwave"] {
+  --bg:           #1a0a2e;
+  --bg-alt:       #140825;
+  --surface:      #2d1b4e;
+  --border:       rgba(255, 0, 170, 0.22);
+  --border-hover: rgba(0, 245, 255, 0.55);
+  --text:         #fdf4ff;
+  --text-muted:   #d8b4fe;
+  --text-dim:     #a78bfa;
+  --accent:       #ff2d95;
+  --accent-dim:   rgba(255, 45, 149, 0.16);
+  --success:      #00f5ff;
+  --success-dim:  rgba(0, 245, 255, 0.14);
+  --purple:       #f472b6;
+  --purple-dim:   rgba(244, 114, 182, 0.14);
+  --radius:       4px;
+  --radius-lg:    8px;
+}
+
+[data-site-theme="synthwave"] body {
+  background-image:
+    linear-gradient(rgba(255, 45, 149, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 45, 149, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+[data-site-theme="synthwave"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 45, 149, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 0%, rgba(0, 245, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-site-theme="synthwave"] .hero__headline,
+[data-site-theme="synthwave"] .section__title,
+[data-site-theme="synthwave"] .contact__title {
+  text-shadow: 0 0 24px rgba(255, 45, 149, 0.45), 0 0 48px rgba(0, 245, 255, 0.15);
+}
+
+[data-site-theme="synthwave"] .text-accent {
+  color: #00f5ff;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.6);
+}
+
+[data-site-theme="synthwave"] .btn--primary {
+  background: linear-gradient(135deg, #ff2d95, #7c3aed);
+  box-shadow: 0 0 20px rgba(255, 45, 149, 0.4);
+}
+
+[data-site-theme="synthwave"] .nav__inner,
+[data-site-theme="synthwave"] .project-card,
+[data-site-theme="synthwave"] .skill-card {
+  border-color: rgba(255, 45, 149, 0.35);
+  box-shadow: 0 0 24px rgba(255, 45, 149, 0.1);
+}
+
+[data-site-theme="synthwave"] .scroll-progress__fill {
+  background: linear-gradient(90deg, #ff2d95, #00f5ff);
+}
+
+/* ── Hacker Terminal ── */
+[data-site-theme="terminal"] {
+  --bg:           #0a0f0a;
+  --bg-alt:       #0d140d;
+  --surface:      #111a11;
+  --border:       rgba(34, 197, 94, 0.22);
+  --border-hover: rgba(74, 222, 128, 0.5);
+  --text:         #bbf7d0;
+  --text-muted:   #4ade80;
+  --text-dim:     #166534;
+  --accent:       #22c55e;
+  --accent-dim:   rgba(34, 197, 94, 0.14);
+  --success:      #86efac;
+  --success-dim:  rgba(134, 239, 172, 0.12);
+  --purple:       #34d399;
+  --purple-dim:   rgba(52, 211, 153, 0.12);
+  --font:         'JetBrains Mono', monospace;
+  --radius:       2px;
+  --radius-lg:    4px;
+}
+
+[data-site-theme="terminal"] body {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(34, 197, 94, 0.06) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+[data-site-theme="terminal"] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+[data-site-theme="terminal"] .hero__headline,
+[data-site-theme="terminal"] .section__title,
+[data-site-theme="terminal"] .nav__brand-name,
+[data-site-theme="terminal"] .project-card__title,
+[data-site-theme="terminal"] .section__tag,
+[data-site-theme="terminal"] .eyebrow {
+  font-family: var(--mono);
+  letter-spacing: -0.01em;
+}
+
+[data-site-theme="terminal"] .cursor { display: none !important; }
+[data-site-theme="terminal"] body.has-cursor { cursor: crosshair; }
+
+[data-site-theme="terminal"] .btn--primary {
+  background: #166534;
+  border: 1px solid #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+[data-site-theme="terminal"] .nav__inner,
+[data-site-theme="terminal"] .terminal {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.12), inset 0 0 30px rgba(34, 197, 94, 0.03);
+}
+
+[data-site-theme="terminal"] .scroll-progress__fill {
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+/* ── Editorial Paper ── */
+[data-site-theme="paper"] {
+  --bg:           #f5f0e8;
+  --bg-alt:       #ede8df;
+  --surface:      #fffdf9;
+  --border:       rgba(44, 36, 22, 0.14);
+  --border-hover: rgba(180, 83, 9, 0.45);
+  --text:         #2c2416;
+  --text-muted:   #5c4f3a;
+  --text-dim:     #8a7b68;
+  --accent:       #b45309;
+  --accent-dim:   rgba(180, 83, 9, 0.1);
+  --success:      #15803d;
+  --success-dim:  rgba(21, 128, 61, 0.1);
+  --purple:       #7c3aed;
+  --purple-dim:   rgba(124, 58, 237, 0.1);
+  --font:         Georgia, 'Times New Roman', serif;
+  --radius:       3px;
+  --radius-lg:    6px;
+}
+
+[data-site-theme="paper"] body {
+  background-image:
+    linear-gradient(rgba(44, 36, 22, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(44, 36, 22, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+[data-site-theme="paper"] .section__tag,
+[data-site-theme="paper"] .eyebrow,
+[data-site-theme="paper"] .nav__brand-role,
+[data-site-theme="paper"] .terminal,
+[data-site-theme="paper"] .terminal__input,
+[data-site-theme="paper"] .chip,
+[data-site-theme="paper"] .metric__value {
+  font-family: var(--mono);
+}
+
+[data-site-theme="paper"] .hero__headline,
+[data-site-theme="paper"] .section__title,
+[data-site-theme="paper"] .contact__title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+[data-site-theme="paper"] .nav__inner {
+  background: rgba(255, 253, 249, 0.92);
+  border-color: rgba(44, 36, 22, 0.12);
+  box-shadow: 0 4px 24px rgba(44, 36, 22, 0.06);
+}
+
+[data-site-theme="paper"] .nav.is-scrolled .nav__inner {
+  background: rgba(255, 253, 249, 0.97);
+}
+
+[data-site-theme="paper"] .btn--primary {
+  background: #b45309;
+  color: #fffdf9;
+}
+
+[data-site-theme="paper"] .btn--primary:hover {
+  background: #92400e;
+}
+
+[data-site-theme="paper"] .btn--ghost,
+[data-site-theme="paper"] .btn--outline {
+  border-color: rgba(44, 36, 22, 0.2);
+  color: var(--text);
+}
+
+[data-site-theme="paper"] .project-card,
+[data-site-theme="paper"] .skill-card,
+[data-site-theme="paper"] .writing-card,
+[data-site-theme="paper"] .terminal {
+  background: var(--surface);
+  box-shadow: 0 2px 12px rgba(44, 36, 22, 0.06);
+}
+
+[data-site-theme="paper"] .hero__media-overlay {
+  background: linear-gradient(105deg, rgba(245, 240, 232, 0.92) 38%, rgba(245, 240, 232, 0.4) 100%);
+}
+
+[data-site-theme="paper"] .cursor__dot {
+  background: var(--accent);
+  box-shadow: none;
+}
+
+[data-site-theme="paper"] .cursor__ring {
+  border-color: rgba(180, 83, 9, 0.4);
+  background: rgba(180, 83, 9, 0.05);
+}
+
+[data-site-theme="paper"] .scroll-progress__fill {
+  background: var(--accent);
+}
+
+/* ── Neo Brutalist ── */
+[data-site-theme="brutalist"] {
+  --bg:           #fff9c4;
+  --bg-alt:       #ffeb3b;
+  --surface:      #ffffff;
+  --border:       #000000;
+  --border-hover: #000000;
+  --text:         #000000;
+  --text-muted:   #222222;
+  --text-dim:     #444444;
+  --accent:       #ff1744;
+  --accent-dim:   rgba(255, 23, 68, 0.15);
+  --success:      #00c853;
+  --success-dim:  rgba(0, 200, 83, 0.15);
+  --purple:       #651fff;
+  --purple-dim:   rgba(101, 31, 255, 0.15);
+  --radius:       0px;
+  --radius-lg:    0px;
+}
+
+[data-site-theme="brutalist"] body {
+  background-image: none;
+}
+
+[data-site-theme="brutalist"] .nav__inner,
+[data-site-theme="brutalist"] .btn,
+[data-site-theme="brutalist"] .project-card,
+[data-site-theme="brutalist"] .skill-card,
+[data-site-theme="brutalist"] .writing-card,
+[data-site-theme="brutalist"] .terminal,
+[data-site-theme="brutalist"] .contact__form,
+[data-site-theme="brutalist"] .expertise__panel,
+[data-site-theme="brutalist"] .timeline__item,
+[data-site-theme="brutalist"] .nav__pill,
+[data-site-theme="brutalist"] .media-controls__bar {
+  border: 3px solid #000 !important;
+  border-radius: 0 !important;
+  box-shadow: 5px 5px 0 #000 !important;
+}
+
+[data-site-theme="brutalist"] .btn--primary {
+  background: #ff1744;
+  color: #fff;
+}
+
+[data-site-theme="brutalist"] .btn--primary:hover {
+  background: #d50032;
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000 !important;
+}
+
+[data-site-theme="brutalist"] .btn--ghost:hover,
+[data-site-theme="brutalist"] .btn--outline:hover {
+  background: #000;
+  color: #fff9c4;
+}
+
+[data-site-theme="brutalist"] .section__tag,
+[data-site-theme="brutalist"] .eyebrow {
+  background: #000;
+  color: #fff9c4;
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+}
+
+[data-site-theme="brutalist"] .hero__headline,
+[data-site-theme="brutalist"] .section__title {
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+[data-site-theme="brutalist"] .text-accent {
+  color: #ff1744;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+[data-site-theme="brutalist"] .nav__link.is-active {
+  background: #000;
+  color: #fff9c4;
+}
+
+[data-site-theme="brutalist"] .scroll-progress__fill {
+  background: #ff1744;
+  height: 6px;
+}
+
+[data-site-theme="brutalist"] .cursor__dot {
+  background: #000;
+  border-radius: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  box-shadow: none;
+}
+
+[data-site-theme="brutalist"] .cursor__ring {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: transparent;
+}
+
+[data-site-theme="brutalist"] .hero__media-overlay {
+  background: linear-gradient(105deg, rgba(255, 249, 196, 0.88) 40%, rgba(255, 249, 196, 0.3) 100%);
+}
+
+[data-site-theme="brutalist"] .section--alt {
+  background: #ffeb3b;
+}
+
+[data-site-theme="brutalist"] .chip {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
+  font-weight: 700;
+}
+
+/* Shared theme transition polish */
+[data-site-theme] .nav__inner,
+[data-site-theme] .btn,
+[data-site-theme] .project-card,
+[data-site-theme] .skill-card {
+  transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, color 0.4s ease;
+}
+
+/* Terminal keeps its own palette — only tint accents per site theme */
+[data-site-theme="synthwave"] .terminal {
+  --term-accent: #00f5ff;
+  --term-border: rgba(255, 45, 149, 0.38);
+}
+
+[data-site-theme="terminal"] .terminal {
+  --term-accent: #22c55e;
+  --term-text: #bbf7d0;
+  --term-muted: #4ade80;
+  --term-dim: #166534;
+  --term-border: rgba(34, 197, 94, 0.38);
+}
+
+[data-site-theme="paper"] .terminal {
+  --term-accent: #d97706;
+  --term-border: rgba(180, 83, 9, 0.35);
+}
+
+[data-site-theme="brutalist"] .terminal {
+  --term-accent: #ff6b8a;
+  --term-border: rgba(255, 23, 68, 0.45);
+}

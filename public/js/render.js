@@ -101,10 +101,18 @@ export function renderHero(data) {
   `;
 
   const termLines = terminal.lines.map(line => {
-    if (line.type === 'cmd') return `<div class="terminal__line"><span class="t-prompt">$</span> ${esc(line.text)}</div>`;
-    if (line.type === 'accent') return `<div class="terminal__line t-dim">${esc(line.text.split(':')[0])}: <span class="t-accent">${esc(line.text.split(':').slice(1).join(':').trim())}</span></div>`;
-    if (line.type === 'live') return `<div class="terminal__line t-dim">${esc(line.text.split(' ').slice(0, -2).join(' '))} <span class="t-accent" id="liveCount">28,412</span> ${esc(line.text.split(' ').slice(-2).join(' '))}</div>`;
-    return `<div class="terminal__line t-dim">${esc(line.text)}</div>`;
+    if (line.type === 'cmd') return `<div class="terminal__line terminal__line--cmd"><span class="t-prompt">$</span> ${esc(line.text)}</div>`;
+    if (line.type === 'accent') {
+      const [label, ...rest] = line.text.split(':');
+      return `<div class="terminal__line"><span class="t-dim">${esc(label)}:</span> <span class="t-accent">${esc(rest.join(':').trim())}</span></div>`;
+    }
+    if (line.type === 'live') {
+      const words = line.text.split(' ');
+      const tail = words.slice(-2).join(' ');
+      const head = words.slice(0, -2).join(' ');
+      return `<div class="terminal__line"><span class="t-dim">${esc(head)}</span> <span class="t-accent" id="liveCount">28,412</span> <span class="t-dim">${esc(tail)}</span></div>`;
+    }
+    return `<div class="terminal__line terminal__line--dim">${esc(line.text)}</div>`;
   }).join('');
 
   $('#heroTerminal').innerHTML = `
@@ -113,10 +121,10 @@ export function renderHero(data) {
         <button type="button" class="terminal__handle" id="terminalDragHandle" aria-label="Drag terminal" title="Drag">
           <span class="terminal__grip" aria-hidden="true"></span>
         </button>
-        <span class="terminal__dot terminal__dot--red"></span>
-        <span class="terminal__dot terminal__dot--yellow"></span>
-        <span class="terminal__dot terminal__dot--green"></span>
-        <span class="terminal__filename">${esc(terminal.filename)}</span>
+        <button type="button" class="terminal__dot terminal__dot--red" id="terminalDotRed" aria-label="Minimize terminal" title="Minimize"></button>
+        <button type="button" class="terminal__dot terminal__dot--yellow" id="terminalDotYellow" aria-label="Change terminal theme" title="Theme"></button>
+        <button type="button" class="terminal__dot terminal__dot--green" id="terminalDotGreen" aria-label="Restart pipeline" title="Restart"></button>
+        <button type="button" class="terminal__filename" title="View file info">${esc(terminal.filename)}</button>
         <button type="button" class="terminal__expand" id="terminalExpandBtn" aria-label="Expand terminal" aria-pressed="false" title="Expand">
           <svg class="terminal__expand-icon terminal__expand-icon--open" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M1.5 4.5V1.5H4.5M7.5 1.5H10.5V4.5M10.5 7.5V10.5H7.5M4.5 10.5H1.5V7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -127,7 +135,9 @@ export function renderHero(data) {
         </button>
         <span class="terminal__badge">RUNNING</span>
       </div>
-      <div class="terminal__body" id="terminalOutput">${termLines}</div>
+      <div class="terminal__body" id="terminalOutput">${termLines}
+        <canvas class="terminal__matrix" id="terminalMatrix" hidden aria-hidden="true"></canvas>
+      </div>
       <form class="terminal__input-row" id="terminalForm" autocomplete="off">
         <span class="t-prompt">$</span>
         <input class="terminal__input" id="terminalInput" type="text" spellcheck="false" placeholder='type "debug" to unlock' aria-label="Terminal command" />

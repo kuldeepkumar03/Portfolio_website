@@ -62,7 +62,25 @@
   },
 
   "easterEgg": {
-    "unlockCommands": ["debug", "konami", "sudo debug"]
+    "unlockCommands": ["debug", "konami", "sudo debug", "open sesame", "hack the planet"],
+    "hints": [
+      "type \"debug\" to unlock",
+      "try: konami code ↑↑↓↓←→←→BA",
+      "try: sudo debug",
+      "try: open sesame",
+      "click the traffic lights ↑",
+      "unlock then: theme synthwave"
+    ],
+    "fortunes": [
+      "The best model is the one that ships.",
+      "Your validation set is watching. Always.",
+      "Feature engineering is 80% of the job. The other 80% is debugging.",
+      "If it works in Jupyter, it might work in prod. Might.",
+      "Gradient descent: slowly getting less wrong since 1950.",
+      "Overfitting is just confidence before the test set humbles you.",
+      "Always split before you shuffle. Trust me.",
+      "Production is just staging with real money on the line."
+    ]
   },
 
   "about": {
