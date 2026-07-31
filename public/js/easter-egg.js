@@ -34,6 +34,16 @@ const LOCKED_DENIALS = [
 
 const UNLOCK_COMMANDS = new Set(['debug', 'konami', 'sudo debug', 'open sesame', 'hack the planet']);
 
+const COMMAND_ALIASES = {
+  h: 'help',
+  '?': 'help',
+  cls: 'clear',
+  ll: 'ls',
+};
+
+const HISTORY_KEY = 'portfolio-terminal-history';
+const MAX_OUTPUT_LINES = 120;
+
 const NEOFETCH = [
   '       ███████╗██╗  ██╗██████╗ ',
   '       ██╔════╝╚██╗██╔╝██╔══██╗',
@@ -50,7 +60,7 @@ function buildCommands(ctx) {
         'Available commands:',
         '  help          — show this message',
         '  whoami        — who runs this pipeline',
-        '  predict       — sample EDD inference',
+        '  predict <pin> [kg] — EDD inference demo',
         '  explain       — SHAP-style feature breakdown',
         '  status        — production model health',
         '  train         — watch a fake training run',
@@ -59,15 +69,21 @@ function buildCommands(ctx) {
         '  fortune       — wisdom from the ML gods',
         '  cowsay <msg>  — the cow has opinions',
         '  neofetch      — system info, dev edition',
-        '  matrix        — enter the matrix',
+        '  matrix        — full-page matrix rain',
         '  theme <name>  — full site redesign',
+        '  reset         — restore default theme & effects',
         '  coffee        — deploy fuel',
         '  ping          — latency check',
         '  roll          — d20 hire probability',
         '  hire_kuldeep  — you know what to do',
+        '  contact       — email & social links',
+        '  about         — jump to about + summary',
+        '  skills        — tech stack overview',
         '  projects      — jump to projects',
         '  history       — command history',
-        '  clear         — clear terminal output',
+        '  clear / cls   — clear terminal output',
+        '',
+        'Aliases: h → help, ll → ls',
       ].join('\n');
     },
 
@@ -81,20 +97,94 @@ function buildCommands(ctx) {
       ].join('\n');
     },
 
-    predict(args) {
+    async predict(args) {
       const pincode = args[0] || '400001';
-      const days = (2 + Math.random() * 2).toFixed(1);
-      const conf = (0.88 + Math.random() * 0.08).toFixed(2);
-      const couriers = ['Delhivery', 'BlueDart', 'Ekart', 'Xpressbees'];
+      const weightArg = args[1];
+
+      if (!/^\d{6}$/.test(pincode)) {
+        return 'Invalid pincode. Usage: predict <6-digit-pin> [weight_kg]\nExample: predict 400001 1.2';
+      }
+
+      const weight = weightArg
+        ? Number.parseFloat(weightArg).toFixed(1)
+        : (0.4 + Math.random() * 4.5).toFixed(1);
+
+      if (weightArg && Number.isNaN(Number.parseFloat(weightArg))) {
+        return 'Weight must be a number in kg. Example: predict 400001 1.2';
+      }
+
+      const zoneMap = {
+        '11': 'North · Delhi NCR',
+        '40': 'West · Mumbai Metro',
+        '56': 'South · Bangalore',
+        '60': 'South · Chennai',
+        '70': 'East · Kolkata',
+        '41': 'West · Pune',
+        '12': 'North · Chandigarh',
+      };
+      const zone = zoneMap[pincode.slice(0, 2)] || `Zone ${pincode.slice(0, 2)} · Tier-2`;
+
+      const couriers = ['Delhivery', 'BlueDart', 'Ekart', 'Xpressbees', 'DTDC'];
       const courier = couriers[Math.floor(Math.random() * couriers.length)];
-      return [
-        `Running EDD inference for pincode ${pincode}...`,
-        `Courier route: ${courier}`,
-        `Predicted delivery: ${days} days`,
-        `Confidence: ${conf}`,
-        'Model: xgboost_ensemble_v3',
-        'SHAP top feature: zone_density (+0.22)',
-      ].join('\n');
+
+      const baseDays = 2.0 + Math.random() * 2.6;
+      const buffer = 0.25 + Math.random() * 0.55;
+      const days = baseDays.toFixed(1);
+      const conf = 0.86 + Math.random() * 0.11;
+      const riskRoll = Math.random();
+      const risk = riskRoll > 0.82 ? 'HIGH' : riskRoll > 0.55 ? 'MEDIUM' : 'LOW';
+
+      const eta = new Date();
+      eta.setDate(eta.getDate() + Math.ceil(baseDays + buffer));
+      const etaStr = eta.toLocaleDateString('en-IN', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+      });
+
+      const shapBar = (value) => {
+        const width = Math.min(14, Math.max(1, Math.round(Math.abs(value) * 28)));
+        return (value >= 0 ? '█' : '▓').repeat(width);
+      };
+
+      const features = [
+        { name: 'courier_tat', value: 0.24 + Math.random() * 0.12 },
+        { name: 'zone_density', value: 0.14 + Math.random() * 0.14 },
+        { name: 'pincode_rto_rate', value: -(0.06 + Math.random() * 0.14) },
+        { name: 'shipment_weight', value: 0.03 + (Number(weight) / 12) },
+        { name: 'pickup_hour', value: 0.02 + Math.random() * 0.06 },
+      ].sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+
+      ctx.appendLine(`POST /v1/edd/infer  pincode=${pincode}  weight=${weight}kg`, 'dim');
+      ctx.appendLine('Fetching feature vector from store...', 'dim');
+      await ctx.sleep(160);
+      ctx.appendLine('Running xgboost_ensemble_v3 (n_estimators=12)...', 'dim');
+      await ctx.sleep(240);
+      ctx.appendLine('Applying LightGBM buffer layer...', 'dim');
+      await ctx.sleep(140);
+
+      ctx.appendLine('─'.repeat(44), 'dim');
+      ctx.appendLine(`  Zone         ${zone}`, 'dim');
+      ctx.appendLine(`  Courier      ${courier}`, 'dim');
+      ctx.appendLine(`  EDD          ${days} days  (±${buffer.toFixed(1)}d buffer)`, 'accent');
+      ctx.appendLine(`  ETA          ${etaStr}`, 'accent');
+      ctx.appendLine(`  Confidence   ${(conf * 100).toFixed(0)}%`, 'dim');
+      ctx.appendLine(`  Risk tier    ${risk}`, risk === 'HIGH' ? 'warn' : risk === 'MEDIUM' ? 'accent' : 'success');
+      ctx.appendLine('─'.repeat(44), 'dim');
+      ctx.appendLine('SHAP top drivers:', 'dim');
+
+      features.slice(0, 3).forEach((feature) => {
+        const sign = feature.value >= 0 ? '+' : '';
+        ctx.appendLine(
+          `  ${feature.name.padEnd(18)} ${sign}${feature.value.toFixed(2)}  ${shapBar(feature.value)}`,
+          'dim',
+        );
+      });
+
+      ctx.appendLine(
+        `latency ${(7 + Math.random() * 8).toFixed(1)}ms  |  model xgboost_ensemble_v3  |  status OK`,
+        'success',
+      );
     },
 
     explain() {
@@ -194,27 +284,36 @@ function buildCommands(ctx) {
 
     neofetch() {
       const { person } = ctx.data;
+      const theme = getSiteTheme();
       return [
         ...NEOFETCH,
         '',
-        'OS: Portfolio Linux x86_64',
         `Host: ${person?.name || 'Kuldeep Kumar'}`,
-        `Kernel: ${person?.title || 'Junior Data Scientist'}`,
+        `Role: ${person?.title || 'Junior Data Scientist'}`,
+        `Shell: inference_pipeline.py`,
+        `Debug mode: ${ctx.unlocked ? 'enabled' : 'locked'}`,
+        `Site theme: ${theme}`,
+        `Matrix rain: ${ctx.isMatrixOn ? 'ON' : 'off'}`,
+        `Commands run: ${ctx.history.length}`,
         'Uptime: since first "hello world"',
-        'Packages: 847 (pip list --short | wc -l)',
-        'Shell: inference_pipeline.py',
-        'Terminal: hero-debug-console',
-        'CPU: XGBoost @ 12ms p99',
-        'Memory: 3M rows loaded',
-        'Theme: dark-mode-forever',
       ].join('\n');
     },
 
     matrix() {
       ctx.toggleMatrix();
       return ctx.isMatrixOn
-        ? 'Wake up, Neo... matrix mode enabled.'
+        ? 'Wake up, Neo... full-page matrix enabled.'
         : 'Matrix mode disabled. Welcome back to reality.';
+    },
+
+    reset() {
+      ctx.resetAll();
+      return [
+        'Reset complete.',
+        '  site theme   → Precision Lab default',
+        '  matrix rain  → off',
+        '  terminal UI  → default',
+      ].join('\n');
     },
 
     theme(args) {
@@ -310,6 +409,37 @@ function buildCommands(ctx) {
       ].join('\n');
     },
 
+    contact() {
+      const { person, social } = ctx.data;
+      return [
+        'Contact channels:',
+        `  email     ${person?.email || 'deepkul2002@gmail.com'}`,
+        ...(social || []).map((link) => `  ${link.label.padEnd(10)} ${link.url}`),
+      ].join('\n');
+    },
+
+    about() {
+      const section = ctx.data.about;
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+      ctx.showToast('Scrolling to about...');
+      if (!section) return 'About section not found.';
+      return [
+        `${section.title} ${section.titleBreak || ''}`.trim(),
+        ...(section.paragraphs?.slice(0, 2) || []),
+      ].join('\n');
+    },
+
+    skills() {
+      const skills = ctx.data.skills;
+      document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+      ctx.showToast('Scrolling to skills...');
+      if (!skills?.categories?.length) return 'Skills data not loaded.';
+      return [
+        'Tech stack:',
+        ...skills.categories.map((cat) => `  ${cat.title.padEnd(18)} ${cat.tech.join(' · ')}`),
+      ].join('\n');
+    },
+
     projects() {
       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
       ctx.showToast('Scrolling to projects...');
@@ -355,7 +485,7 @@ export function initEasterEgg(portfolioData) {
   const input = document.getElementById('terminalInput');
   const badge = wrap?.querySelector('.terminal__badge');
   const toast = document.getElementById('toast');
-  const matrixCanvas = document.getElementById('terminalMatrix');
+  const matrixCanvas = document.getElementById('matrixCanvas');
   const dotRed = document.getElementById('terminalDotRed');
   const dotYellow = document.getElementById('terminalDotYellow');
   const dotGreen = document.getElementById('terminalDotGreen');
@@ -365,7 +495,13 @@ export function initEasterEgg(portfolioData) {
 
   let unlocked = false;
   let konamiIdx = 0;
-  const history = [];
+  let history = [];
+  try {
+    history = JSON.parse(sessionStorage.getItem(HISTORY_KEY) || '[]');
+    if (!Array.isArray(history)) history = [];
+  } catch {
+    history = [];
+  }
   let historyIdx = -1;
   let matrixOn = false;
   let matrixAnim = null;
@@ -414,7 +550,22 @@ export function initEasterEgg(portfolioData) {
       line.textContent = text;
     }
     output.appendChild(line);
+
+    const lines = output.querySelectorAll('.terminal__line');
+    if (lines.length > MAX_OUTPUT_LINES) {
+      [...lines].slice(0, lines.length - MAX_OUTPUT_LINES).forEach((el) => el.remove());
+    }
+
     output.scrollTop = output.scrollHeight;
+  };
+
+  const saveHistory = () => {
+    sessionStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-50)));
+  };
+
+  const resolveCommand = (raw) => {
+    const [cmd, ...args] = raw.toLowerCase().split(/\s+/);
+    return [COMMAND_ALIASES[cmd] || cmd, ...args];
   };
 
   const appendBlock = (text, type = 'dim') => {
@@ -433,32 +584,30 @@ export function initEasterEgg(portfolioData) {
   const startMatrixRain = () => {
     if (!matrixCanvas) return;
     const canvas = matrixCanvas;
-    const body = output;
     const ctx2d = canvas.getContext('2d');
     const chars = '01アイウエオカキクケコサシスセソタチツテト';
     let cols;
     let drops;
 
     const resize = () => {
-      const rect = body.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      cols = Math.floor(canvas.width / 14);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      cols = Math.floor(canvas.width / 16);
       drops = Array(cols).fill(1);
     };
 
     resize();
 
     const draw = () => {
-      ctx2d.fillStyle = 'rgba(12, 15, 20, 0.08)';
+      ctx2d.fillStyle = 'rgba(12, 15, 20, 0.06)';
       ctx2d.fillRect(0, 0, canvas.width, canvas.height);
       ctx2d.fillStyle = '#34d399';
-      ctx2d.font = '12px JetBrains Mono, monospace';
+      ctx2d.font = '14px JetBrains Mono, monospace';
 
       for (let i = 0; i < cols; i++) {
         const char = chars[Math.floor(Math.random() * chars.length)];
-        ctx2d.fillText(char, i * 14, drops[i] * 14);
-        if (drops[i] * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        ctx2d.fillText(char, i * 16, drops[i] * 16);
+        if (drops[i] * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       }
       matrixAnim = requestAnimationFrame(draw);
@@ -469,9 +618,12 @@ export function initEasterEgg(portfolioData) {
     addEventListener('resize', resize);
   };
 
-  const toggleMatrix = () => {
-    matrixOn = !matrixOn;
+  const setMatrix = (on) => {
+    if (matrixOn === on) return;
+    matrixOn = on;
+    document.body.classList.toggle('is-matrix', matrixOn);
     wrap.classList.toggle('is-matrix', matrixOn);
+
     if (!matrixCanvas) return;
 
     if (matrixOn) {
@@ -484,14 +636,36 @@ export function initEasterEgg(portfolioData) {
     }
   };
 
+  const toggleMatrix = () => {
+    setMatrix(!matrixOn);
+  };
+
+  const resetAll = () => {
+    if (matrixOn) setMatrix(false);
+
+    applySiteTheme('reset');
+
+    themes.forEach((themeClass) => wrap.classList.remove(themeClass));
+    themeIdx = 0;
+    minimized = false;
+    wrap.classList.remove('is-minimized', 'is-expanded');
+
+    const expandBtn = document.getElementById('terminalExpandBtn');
+    expandBtn?.setAttribute('aria-pressed', 'false');
+
+    showToast('Defaults restored');
+  };
+
   const ctx = {
     data: portfolioData,
     history,
+    get unlocked() { return unlocked; },
     get isMatrixOn() { return matrixOn; },
     appendLine,
     sleep: (ms) => new Promise(r => setTimeout(r, ms)),
     showToast,
     toggleMatrix,
+    resetAll,
   };
 
   const COMMANDS = buildCommands(ctx);
@@ -573,6 +747,7 @@ export function initEasterEgg(portfolioData) {
     appendLine(trimmed, 'cmd');
     history.push(trimmed);
     historyIdx = -1;
+    saveHistory();
 
     if (!unlocked) {
       const lower = trimmed.toLowerCase();
@@ -585,7 +760,7 @@ export function initEasterEgg(portfolioData) {
       return;
     }
 
-    const [cmd, ...args] = trimmed.toLowerCase().split(/\s+/);
+    const [cmd, ...args] = resolveCommand(trimmed);
     const handler = COMMANDS[cmd];
 
     if (!handler) {
@@ -607,27 +782,57 @@ export function initEasterEgg(portfolioData) {
       return;
     }
     if (result) {
-      appendBlock(result, ['hire_kuldeep', 'roll'].includes(cmd) ? 'success' : 'dim');
+      appendBlock(result, ['hire_kuldeep', 'roll', 'reset'].includes(cmd) ? 'success' : 'dim');
     }
   };
 
-  const commandNames = () => Object.keys(COMMANDS);
+  const commandNames = () => [
+    ...Object.keys(COMMANDS),
+    ...Object.keys(COMMAND_ALIASES),
+  ];
 
   const tabComplete = (value) => {
     const trimmed = normalizeInput(value);
     const parts = trimmed.split(/\s+/);
     const base = parts[0].toLowerCase();
-    const matches = commandNames().filter(c => c.startsWith(base));
-    if (matches.length === 1) {
-      return matches[0] + (parts.length > 1 ? ` ${parts.slice(1).join(' ')}` : ' ');
+    const cmd = COMMAND_ALIASES[base] || base;
+
+    if (parts.length === 1) {
+      const matches = [...new Set([
+        ...Object.keys(COMMANDS).filter((name) => name.startsWith(base)),
+        ...Object.entries(COMMAND_ALIASES)
+          .filter(([alias, target]) => alias.startsWith(base) || target.startsWith(base))
+          .map(([alias]) => alias),
+      ])];
+      if (matches.length === 1) return `${matches[0]} `;
+      if (matches.length > 1) appendBlock(matches.join('  '), 'dim');
+      return value;
     }
-    if (matches.length > 1) appendBlock(matches.join('  '), 'dim');
+
+    if (cmd === 'theme' && parts.length === 2) {
+      const partial = parts[1].toLowerCase();
+      const themeNames = ['default', 'reset', 'random', ...Object.keys(SITE_THEMES)];
+      const matches = themeNames.filter((name) => name.startsWith(partial));
+      if (matches.length === 1) return `theme ${matches[0]} `;
+      if (matches.length > 1) appendBlock(matches.join('  '), 'dim');
+      return value;
+    }
+
+    if (cmd === 'cat' && parts.length === 2) {
+      const partial = parts[1].toLowerCase();
+      const files = ['resume', 'secrets.env', 'coffee.log'];
+      const matches = files.filter((file) => file.startsWith(partial));
+      if (matches.length === 1) return `cat ${matches[0]} `;
+      if (matches.length > 1) appendBlock(matches.join('  '), 'dim');
+      return value;
+    }
+
     return value;
   };
 
   const cyclePlaceholder = () => {
     input.placeholder = unlocked
-      ? 'try: theme synthwave, train, fortune, matrix'
+      ? 'try: theme synthwave, matrix, reset, fortune'
       : hints[hintIdx % hints.length];
     hintIdx++;
   };
@@ -641,6 +846,12 @@ export function initEasterEgg(portfolioData) {
   });
 
   input.addEventListener('keydown', (e) => {
+    if (e.key === 'l' && (e.ctrlKey || e.metaKey) && unlocked) {
+      e.preventDefault();
+      output.querySelectorAll('.terminal__line').forEach((el) => el.remove());
+      return;
+    }
+
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (!history.length) return;
@@ -709,9 +920,16 @@ export function initEasterEgg(portfolioData) {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.activeElement === input) {
-      input.blur();
-      return;
+    if (e.key === 'Escape') {
+      if (matrixOn) {
+        setMatrix(false);
+        showToast('Matrix disabled');
+        return;
+      }
+      if (document.activeElement === input) {
+        input.blur();
+        return;
+      }
     }
 
     const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;

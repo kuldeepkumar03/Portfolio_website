@@ -136,7 +136,6 @@ export function renderHero(data) {
         <span class="terminal__badge">RUNNING</span>
       </div>
       <div class="terminal__body" id="terminalOutput">${termLines}
-        <canvas class="terminal__matrix" id="terminalMatrix" hidden aria-hidden="true"></canvas>
       </div>
       <form class="terminal__input-row" id="terminalForm" autocomplete="off">
         <span class="t-prompt">$</span>
@@ -305,17 +304,21 @@ export function renderProjects(data) {
       <span class="section__tag">${esc(p.tag)}</span>
       <h2 class="section__title">${esc(p.title)}</h2>
       <p class="section__subtitle">${esc(p.subtitle)}</p>
-      <div class="projects-carousel reveal">
+      <div class="projects-carousel reveal" id="projectsCarousel">
         <div class="projects-carousel__header">
-          <button class="carousel-btn" id="projectsPrev" type="button" aria-label="Previous projects">
+          <span class="projects-carousel__count" id="projectsCount" aria-live="polite"></span>
+        </div>
+        <div class="projects-carousel__viewport">
+          <button class="carousel-btn carousel-btn--side carousel-btn--prev" id="projectsPrev" type="button" aria-label="Previous projects">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <span class="projects-carousel__count" id="projectsCount" aria-live="polite"></span>
-          <button class="carousel-btn" id="projectsNext" type="button" aria-label="Next projects">
+          <div class="projects-carousel__fade projects-carousel__fade--left" aria-hidden="true"></div>
+          <div class="projects-carousel__track" id="projectsTrack">${allProjects.map(projectCard).join('')}</div>
+          <div class="projects-carousel__fade projects-carousel__fade--right" aria-hidden="true"></div>
+          <button class="carousel-btn carousel-btn--side carousel-btn--next" id="projectsNext" type="button" aria-label="Next projects">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div class="projects-carousel__track" id="projectsTrack">${allProjects.map(projectCard).join('')}</div>
       </div>
     </div>
   `;

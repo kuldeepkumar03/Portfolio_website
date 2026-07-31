@@ -346,6 +346,7 @@ function initCounters() {
 
 function initProjectsCarousel() {
   const track = $('#projectsTrack');
+  const carousel = $('#projectsCarousel');
   const prev = $('#projectsPrev');
   const next = $('#projectsNext');
   const count = $('#projectsCount');
@@ -359,14 +360,35 @@ function initProjectsCarousel() {
     return card ? card.offsetWidth + gap : track.clientWidth * 0.85;
   };
 
-  const update = () => {
-    const total = cards().length;
-    if (!total) return;
+  const getEdgeState = () => {
+    const items = cards();
+    const total = items.length;
+    if (!total) return { index: 0, atStart: true, atEnd: true };
+
+    const trackRect = track.getBoundingClientRect();
+    const firstRect = items[0].getBoundingClientRect();
+    const lastRect = items[total - 1].getBoundingClientRect();
+    const atStart = firstRect.left >= trackRect.left - 6;
+    const atEnd = lastRect.right <= trackRect.right + 6;
+
     const step = scrollStep();
-    const index = Math.min(total - 1, Math.max(0, Math.round(track.scrollLeft / step)));
+    const index = Math.min(
+      total - 1,
+      Math.max(0, Math.round(track.scrollLeft / step)),
+    );
+
+    return { index, atStart, atEnd, total };
+  };
+
+  const update = () => {
+    const { index, atStart, atEnd, total } = getEdgeState();
+    if (!total) return;
+
     if (count) count.textContent = `${index + 1} / ${total}`;
-    if (prev) prev.disabled = track.scrollLeft <= 4;
-    if (next) next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    if (prev) prev.disabled = atStart;
+    if (next) next.disabled = atEnd;
+    carousel?.classList.toggle('is-at-start', atStart);
+    carousel?.classList.toggle('is-at-end', atEnd);
   };
 
   prev?.addEventListener('click', () => {
@@ -376,6 +398,79 @@ function initProjectsCarousel() {
   next?.addEventListener('click', () => {
     track.scrollBy({ left: scrollStep(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
+
+  const carouselRoot = carousel || track.closest('.projects-carousel');
+  let dragPointerId = null;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let dragMoved = false;
+
+  const onWheel = (e) => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (maxScroll <= 1) return;
+
+    const deltaY = e.deltaY;
+    const deltaX = e.deltaX;
+    const useHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
+    const delta = useHorizontal ? deltaX : deltaY;
+    if (!delta) return;
+
+    const { atStart, atEnd } = getEdgeState();
+
+    if (!useHorizontal) {
+      if (delta > 0 && atEnd) return;
+      if (delta < 0 && atStart) return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+    track.scrollBy({ left: delta, behavior: 'auto' });
+    update();
+  };
+
+  carouselRoot?.addEventListener('wheel', onWheel, { passive: false, capture: true });
+  track.addEventListener('wheel', onWheel, { passive: false, capture: true });
+
+  track.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 || e.target.closest('.carousel-btn')) return;
+    dragPointerId = e.pointerId;
+    dragStartX = e.clientX;
+    dragStartScroll = track.scrollLeft;
+    dragMoved = false;
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if (dragPointerId !== e.pointerId) return;
+    const delta = e.clientX - dragStartX;
+    if (Math.abs(delta) < 4) return;
+    dragMoved = true;
+    track.classList.add('is-dragging');
+    track.scrollLeft = dragStartScroll - delta;
+    update();
+  });
+
+  const endDrag = (e) => {
+    if (dragPointerId !== e.pointerId) return;
+    const wasDrag = dragMoved;
+    dragPointerId = null;
+    track.classList.remove('is-dragging');
+    try { track.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+    if (wasDrag) {
+      setTimeout(() => { dragMoved = false; }, 80);
+    } else {
+      dragMoved = false;
+    }
+  };
+
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+
+  track.addEventListener('click', (e) => {
+    if (!dragMoved) return;
+    e.preventDefault();
+    e.stopPropagation();
+  }, true);
 
   track.addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update, { passive: true });
