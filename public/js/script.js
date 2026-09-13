@@ -287,26 +287,17 @@ function initNav() {
   addEventListener('scroll', () => nav?.classList.toggle('is-scrolled', scrollY > 30), { passive: true });
 }
 
-function scrollToSection(id) {
-  const target = document.getElementById(id);
-  if (!target) return;
-
-  const navOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
-  const top = Math.max(target.offsetTop - navOffset - 4, 0);
-
-  scrollTo({
-    top,
-    behavior: prefersReducedMotion ? 'auto' : 'smooth',
-  });
-}
-
 function initSmoothScroll() {
   $$('[data-scroll], a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       const id = link.dataset.scroll || link.getAttribute('href')?.slice(1);
       if (!id) return;
-      e.preventDefault();
-      scrollToSection(id);
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+        scrollTo({ top: target.offsetTop - offset + 1, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
     });
   });
 }
@@ -353,14 +344,6 @@ function initCounters() {
   $$('[data-count]').forEach(el => obs.observe(el));
 }
 
-function setActiveProjectCard(card, countEl = $('#projectsCount')) {
-  const items = [...document.querySelectorAll('.project-card')];
-  if (!items.length || !card) return;
-
-  const index = items.indexOf(card);
-  if (countEl && index >= 0) countEl.textContent = `${index + 1} / ${items.length}`;
-}
-
 function initProjectsCarousel() {
   const track = $('#projectsTrack');
   const carousel = $('#projectsCarousel');
@@ -377,35 +360,6 @@ function initProjectsCarousel() {
     return card ? card.offsetWidth + gap : track.clientWidth * 0.85;
   };
 
-  const setActiveCard = (card) => setActiveProjectCard(card, count);
-
-  const getActiveCard = () => {
-    const items = cards();
-    if (!items.length) return null;
-
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const atStart = track.scrollLeft <= 2;
-    const atEnd = maxScroll <= 1 || track.scrollLeft >= maxScroll - 6;
-
-    if (atStart) return items[0];
-    if (atEnd) return items[items.length - 1];
-
-    const trackRect = track.getBoundingClientRect();
-    let activeCard = items[0];
-    let minDistance = Number.POSITIVE_INFINITY;
-
-    items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const leftDistance = Math.abs(rect.left - trackRect.left);
-      if (leftDistance < minDistance) {
-        minDistance = leftDistance;
-        activeCard = item;
-      }
-    });
-
-    return activeCard;
-  };
-
   const getEdgeState = () => {
     const items = cards();
     const total = items.length;
@@ -417,9 +371,10 @@ function initProjectsCarousel() {
     const atStart = firstRect.left >= trackRect.left - 6;
     const atEnd = lastRect.right <= trackRect.right + 6;
 
+    const step = scrollStep();
     const index = Math.min(
       total - 1,
-      Math.max(0, items.indexOf(getActiveCard() || items[0])),
+      Math.max(0, Math.round(track.scrollLeft / step)),
     );
 
     return { index, atStart, atEnd, total };
@@ -429,10 +384,7 @@ function initProjectsCarousel() {
     const { index, atStart, atEnd, total } = getEdgeState();
     if (!total) return;
 
-    const activeCard = getActiveCard();
-    if (activeCard) setActiveCard(activeCard);
-    else if (count) count.textContent = `${index + 1} / ${total}`;
-
+    if (count) count.textContent = `${index + 1} / ${total}`;
     if (prev) prev.disabled = atStart;
     if (next) next.disabled = atEnd;
     carousel?.classList.toggle('is-at-start', atStart);
@@ -441,12 +393,10 @@ function initProjectsCarousel() {
 
   prev?.addEventListener('click', () => {
     track.scrollBy({ left: -scrollStep(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    requestAnimationFrame(() => update());
   });
 
   next?.addEventListener('click', () => {
     track.scrollBy({ left: scrollStep(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    requestAnimationFrame(() => update());
   });
 
   const carouselRoot = carousel || track.closest('.projects-carousel');
@@ -522,22 +472,8 @@ function initProjectsCarousel() {
     e.stopPropagation();
   }, true);
 
-  track.addEventListener('scroll', () => {
-    requestAnimationFrame(update);
-  }, { passive: true });
+  track.addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update, { passive: true });
-
-  cards().forEach((card) => {
-    card.addEventListener('click', () => {
-      setActiveCard(card);
-    });
-  });
-
-  const firstCard = cards()[0];
-  if (firstCard) {
-    setActiveCard(firstCard);
-    firstCard.classList.add('is-active');
-  }
   update();
 }
 
@@ -601,38 +537,8 @@ function initProjectCards() {
     modal.querySelector('.project-modal__close')?.focus();
   };
 
-  const toggleExpandedCard = (card) => {
-    const shouldExpand = !card.classList.contains('is-expanded');
-
-    cards.forEach((item) => {
-      const isThisCard = item === card;
-      const detail = item.querySelector('.project-card__detail');
-      const summary = item.querySelector('.project-card__summary');
-
-      item.classList.toggle('is-expanded', isThisCard && shouldExpand);
-      if (summary) summary.setAttribute('aria-expanded', String(isThisCard && shouldExpand));
-      if (detail) {
-        detail.hidden = !(isThisCard && shouldExpand);
-        detail.style.display = isThisCard && shouldExpand ? 'block' : 'none';
-      }
-    });
-
-    setActiveProjectCard(card, $('#projectsCount'));
-  };
-
   cards.forEach((card) => {
-    const summary = card.querySelector('.project-card__summary');
-
-    summary?.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      toggleExpandedCard(card);
-    });
-
-    card.addEventListener('click', (event) => {
-      if (event.target.closest('.project-card__summary')) return;
-      toggleExpandedCard(card);
-    });
+    card.querySelector('.project-card__summary')?.addEventListener('click', () => openModal(card));
   });
 
   modal.querySelectorAll('[data-modal-close]').forEach((el) => {

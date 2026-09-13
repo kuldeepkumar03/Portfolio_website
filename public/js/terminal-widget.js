@@ -10,10 +10,9 @@ export function initTerminalWidget() {
   const panel = document.getElementById('heroTerminalPanel');
   const handle = document.getElementById('terminalDragHandle');
   const expandBtn = document.getElementById('terminalExpandBtn');
-  const minimizeBtn = document.getElementById('terminalMinimizeBtn');
   const media = wrap?.closest('.hero__media');
 
-  if (!wrap || !panel || !handle || !expandBtn || !minimizeBtn || !media) return;
+  if (!wrap || !panel || !handle || !expandBtn || !media) return;
 
   let ghost = null;
   let drag = null;
@@ -148,59 +147,14 @@ export function initTerminalWidget() {
     handle.setPointerCapture(e.pointerId);
   });
 
-  let terminalState = 0;
-
-  const applyTerminalState = () => {
-    wrap.classList.remove('is-expanded', 'is-expanded-large', 'is-expanded-full');
-
-    if (terminalState === 1) {
-      wrap.classList.add('is-expanded');
-    }
-
-    if (terminalState === 2) {
-      wrap.classList.add('is-expanded-large');
-    }
-
-    if (terminalState === 3) {
-      wrap.classList.add('is-expanded-full');
-    }
-
-    expandBtn.setAttribute('aria-pressed', String(terminalState > 0));
-
-    if (terminalState === 0) {
-      expandBtn.setAttribute('aria-label', 'Expand terminal');
-      expandBtn.title = 'Expand';
-      return;
-    }
-
-    if (terminalState === 1) {
-      expandBtn.setAttribute('aria-label', 'Open small terminal view');
-      expandBtn.title = 'Small expand';
-      return;
-    }
-
-    if (terminalState === 2) {
-      expandBtn.setAttribute('aria-label', 'Open large terminal view');
-      expandBtn.title = 'Large expand';
-      return;
-    }
-
-    expandBtn.setAttribute('aria-label', 'Open full terminal view');
-    expandBtn.title = 'Full expand';
-  };
-
   expandBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    terminalState = (terminalState + 1) % 4;
-    applyTerminalState();
+    const expanded = wrap.classList.toggle('is-expanded');
+    expandBtn.setAttribute('aria-pressed', String(expanded));
+    expandBtn.setAttribute(
+      'aria-label',
+      expanded ? 'Collapse terminal' : 'Expand terminal',
+    );
+    expandBtn.title = expanded ? 'Collapse' : 'Expand';
   });
-
-  minimizeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    terminalState = 0;
-    wrap.classList.remove('is-minimized');
-    applyTerminalState();
-  });
-
-  applyTerminalState();
 }
