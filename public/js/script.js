@@ -287,17 +287,26 @@ function initNav() {
   addEventListener('scroll', () => nav?.classList.toggle('is-scrolled', scrollY > 30), { passive: true });
 }
 
+function scrollToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  const navOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+  const top = Math.max(target.offsetTop - navOffset - 4, 0);
+
+  scrollTo({
+    top,
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+  });
+}
+
 function initSmoothScroll() {
   $$('[data-scroll], a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       const id = link.dataset.scroll || link.getAttribute('href')?.slice(1);
       if (!id) return;
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
-        scrollTo({ top: target.offsetTop - offset + 1, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-      }
+      e.preventDefault();
+      scrollToSection(id);
     });
   });
 }
@@ -344,6 +353,14 @@ function initCounters() {
   $$('[data-count]').forEach(el => obs.observe(el));
 }
 
+function setActiveProjectCard(card, countEl = $('#projectsCount')) {
+  const items = [...document.querySelectorAll('.project-card')];
+  if (!items.length || !card) return;
+
+  const index = items.indexOf(card);
+  if (countEl && index >= 0) countEl.textContent = `${index + 1} / ${items.length}`;
+}
+
 function initProjectsCarousel() {
   const track = $('#projectsTrack');
   const carousel = $('#projectsCarousel');
@@ -360,6 +377,35 @@ function initProjectsCarousel() {
     return card ? card.offsetWidth + gap : track.clientWidth * 0.85;
   };
 
+  const setActiveCard = (card) => setActiveProjectCard(card, count);
+
+  const getActiveCard = () => {
+    const items = cards();
+    if (!items.length) return null;
+
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const atStart = track.scrollLeft <= 2;
+    const atEnd = maxScroll <= 1 || track.scrollLeft >= maxScroll - 6;
+
+    if (atStart) return items[0];
+    if (atEnd) return items[items.length - 1];
+
+    const trackRect = track.getBoundingClientRect();
+    let activeCard = items[0];
+    let minDistance = Number.POSITIVE_INFINITY;
+
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const leftDistance = Math.abs(rect.left - trackRect.left);
+      if (leftDistance < minDistance) {
+        minDistance = leftDistance;
+        activeCard = item;
+      }
+    });
+
+    return activeCard;
+  };
+
   const getEdgeState = () => {
     const items = cards();
     const total = items.length;
@@ -371,10 +417,9 @@ function initProjectsCarousel() {
     const atStart = firstRect.left >= trackRect.left - 6;
     const atEnd = lastRect.right <= trackRect.right + 6;
 
-    const step = scrollStep();
     const index = Math.min(
       total - 1,
-      Math.max(0, Math.round(track.scrollLeft / step)),
+      Math.max(0, items.indexOf(getActiveCard() || items[0])),
     );
 
     return { index, atStart, atEnd, total };
@@ -384,7 +429,10 @@ function initProjectsCarousel() {
     const { index, atStart, atEnd, total } = getEdgeState();
     if (!total) return;
 
-    if (count) count.textContent = `${index + 1} / ${total}`;
+    const activeCard = getActiveCard();
+    if (activeCard) setActiveCard(activeCard);
+    else if (count) count.textContent = `${index + 1} / ${total}`;
+
     if (prev) prev.disabled = atStart;
     if (next) next.disabled = atEnd;
     carousel?.classList.toggle('is-at-start', atStart);
@@ -393,10 +441,12 @@ function initProjectsCarousel() {
 
   prev?.addEventListener('click', () => {
     track.scrollBy({ left: -scrollStep(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    requestAnimationFrame(() => update());
   });
 
   next?.addEventListener('click', () => {
     track.scrollBy({ left: scrollStep(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    requestAnimationFrame(() => update());
   });
 
   const carouselRoot = carousel || track.closest('.projects-carousel');
@@ -431,9 +481,11 @@ function initProjectsCarousel() {
   carouselRoot?.addEventListener('wheel', onWheel, { passive: false, capture: true });
   track.addEventListener('wheel', onWheel, { passive: false, capture: true });
 
-  track.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0 || e.target.closest('.carousel-btn')) return;
-    dragPointerId = e.pointerId;
+  track.addEventListener('pointermove', (e) => {
+    if (dragPointerId !== e.pointerId) return;
+    const delta = e.clientX - dragStartX;
+    if (Math.abs(delta) < 10) return;   // CHANGE 4 → 10
+    dragMoved = true;
     dragStartX = e.clientX;
     dragStartScroll = track.scrollLeft;
     dragMoved = false;
@@ -472,8 +524,22 @@ function initProjectsCarousel() {
     e.stopPropagation();
   }, true);
 
-  track.addEventListener('scroll', update, { passive: true });
+  track.addEventListener('scroll', () => {
+    requestAnimationFrame(update);
+  }, { passive: true });
   addEventListener('resize', update, { passive: true });
+
+  cards().forEach((card) => {
+    card.addEventListener('click', () => {
+      setActiveCard(card);
+    });
+  });
+
+  const firstCard = cards()[0];
+  if (firstCard) {
+    setActiveCard(firstCard);
+    firstCard.classList.add('is-active');
+  }
   update();
 }
 
@@ -537,8 +603,42 @@ function initProjectCards() {
     modal.querySelector('.project-modal__close')?.focus();
   };
 
+  const toggleExpandedCard = (card) => {
+    cards.forEach((item) => {
+      const isThisCard = item === card;
+      item.classList.toggle('is-expanded', false);
+      const summary = item.querySelector('.project-card__summary');
+      if (summary) summary.setAttribute('aria-expanded', 'false');
+      const detail = item.querySelector('.project-card__detail');
+      if (detail) {
+        detail.hidden = true;
+        detail.style.display = 'none';
+      }
+      if (isThisCard) {
+        openModal(card);
+      }
+    });
+
+    setActiveProjectCard(card, $('#projectsCount'));
+  };
+
   cards.forEach((card) => {
-    card.querySelector('.project-card__summary')?.addEventListener('click', () => openModal(card));
+    const summary = card.querySelector('.project-card__summary');
+
+    summary?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleExpandedCard(card);
+    });
+
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('.project-card__summary')) return;
+      toggleExpandedCard(card);
+    });
+  });
+
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
   });
 
   modal.querySelectorAll('[data-modal-close]').forEach((el) => {
