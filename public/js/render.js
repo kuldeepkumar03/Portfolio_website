@@ -133,6 +133,11 @@ export function renderHero(data) {
             <path d="M4 1.5H1.5V4M8 1.5H10.5V4M10.5 8V10.5H8M4 10.5H1.5V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+        <button type="button" class="terminal__minimize" id="terminalMinimizeBtn" aria-label="Minimize terminal" title="Minimize">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 6H9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
         <span class="terminal__badge">RUNNING</span>
       </div>
       <div class="terminal__body" id="terminalOutput">${termLines}
@@ -280,6 +285,21 @@ export function renderProjects(data) {
             </div>
           </div>
         </button>
+        <div class="project-card__detail">
+          <header class="project-modal__header">
+            <div class="project-modal__head">
+              ${badge ? `<span class="badge ${badge.class}">${badge.label}</span>` : ''}
+              ${proj.category ? `<span class="project-card__category">${esc(proj.category)}</span>` : ''}
+            </div>
+            <h2 class="project-modal__title" id="projectModalTitle">${esc(proj.name)}</h2>
+          </header>
+          ${proj.image ? `<div class="case__visual"><img src="${esc(proj.image)}" alt="${esc(proj.imageAlt || proj.name)}" width="640" height="260"></div>` : ''}
+          <p class="case__desc">${esc(proj.description)}</p>
+          ${proj.flow ? flowHtml(proj.flow) : ''}
+          ${metrics}
+          ${chips(proj.tech)}
+          ${projectLinks(proj.links)}
+        </div>
         <template class="project-card__template">
           <header class="project-modal__header">
             <div class="project-modal__head">

@@ -47,7 +47,7 @@
       { "value": 90, "suffix": "%+", "label": "Model Accuracy" },
       { "value": 5, "suffix": "+", "label": "Production Systems" }
     ],
-    "ticker": ["Python", "XGBoost", "LightGBM", "PySpark", "FastAPI", "AWS", "Docker", "LangChain", "RAG", "MongoDB", "Optuna", "Scikit-learn"]
+    "ticker": ["Python", "SQL", "Pandas", "NumPy", "Scikit-learn", "XGBoost", "LightGBM", "Optuna", "FastAPI", "AWS", "Docker", "Git", "MongoDB", "LangChain", "RAG", "LLMs", "Generative AI", "OpenAI API", "FAISS", "NLP", "MLflow", "Airflow", "FAST APIs", "ETL", "Data Pipelines", "Streamlit"]
   },
 
   "terminal": {
@@ -86,22 +86,22 @@
   "about": {
     "tag": "About",
     "title": "From student to",
-    "titleBreak": "AI systems builder",
+    "titleBreak": "ML systems builder",
     "paragraphs": [
       "I joined ShipDelight when prediction systems were outsourced. We rebuilt everything in-house — from delivery prediction and analytics to risk intelligence and customer communication. Today, these systems power thousands of decisions every day.",
       "I transform complex data into scalable ML systems that deliver measurable outcomes."
     ],
     "timeline": [
-      { "date": "Oct 2024 — Present", "role": "Junior Data Scientist", "org": "ShipDelight — Production ML at scale", "active": true },
-      { "date": "2024", "role": "AI Engineer Intern", "org": "VBluid Tech — LLMs & RAG systems" },
-      { "date": "2023", "role": "Data Science Intern", "org": "iNeuron.ai — Feature engineering, analytics" },
+      { "date": "September 2025 — Present", "role": "Junior Data Scientist", "org": "ShipDelight — Production ML at scale", "active": true },
+      { "date": "September 2024 — October 2024", "role": "AI Engineering Intern", "org": "VBluid Tech — LLMs & RAG systems" },
+      { "date": "May 2023 — July 2023", "role": "ML Engineering Intern", "org": "Vatshayan Technologies — Feature engineering, analytics" },
       { "date": "2020", "role": "B.Tech — Computer Science", "org": "Started the ML obsession" }
     ]
   },
 
   "experience": {
     "tag": "Background",
-    "title": "Experience & expertise",
+    "title": "Experience & Expertise",
     "subtitle": "Production roles and the stack behind them.",
     "workTitle": "Where I've worked",
     "workHint": "Roles, companies & impact",
@@ -109,32 +109,32 @@
     "techHint": "Languages, frameworks & tools",
     "items": [
       {
-        "dates": "Oct 2024 — Present",
-        "org": "ShipDelight",
+        "dates": "September 2025 — Present",
+        "org": "ShipDelight Logistics Technology",
         "role": "Junior Data Scientist",
-        "description": "Leading production ML — delivery prediction, dispatch intelligence, risk modelling. Own the pipeline end-to-end.",
-        "tech": ["XGBoost", "LightGBM", "AWS"]
+        "description": "Leading production ML — Delivery Prediction, Dispatch Intelligence, Risk Modelling, Revenue & Operations Intelligence.",
+        "tech": ["Xgboost | Catboost", "Long Short-Term Memory", "MongoDB","Airflow | MLflow"]
       },
       {
-        "dates": "Feb 2024 — Oct 2024",
-        "org": "ShipDelight",
-        "role": "Frontend Engineer",
-        "description": "Shipped secure internal dashboards and operational tools used daily by the ops team.",
-        "tech": ["React", "Internal Tools"]
-      },
-      {
-        "dates": "Jun 2023 — Aug 2024",
+        "dates": "September 2024 — October 2024",
         "org": "VBluid Tech",
         "role": "AI Engineering Intern",
-        "description": "Built LLM-powered features with OpenAI, LangChain, and optimised retrieval for RAG pipelines.",
-        "tech": ["OpenAI", "RAG", "Python"]
+        "description": "Built LLM-powered features with OpenAI, LangIndex, and optimised retrieval for RAG pipelines.",
+        "tech": ["OpenAI", "Retrieval-Augmented Generation", "Python", "LangIndex | ChromaDb"]
       },
       {
-        "dates": "Nov 2022 — Nov 2023",
-        "org": "Final Year Project",
-        "role": "ML Engineer",
+        "dates": "January 2024 — April 2024",
+        "org": "Hindustan Institute of Technology and Science",
+        "role": "Research Student",
+        "description": "Developed MLTE, a LLaMA 2-based multilingual prompt enhancement model",
+        "tech": ["Prompt Engineering", "Python | LLaMA 2","QLoRA Quantization", "LLMS | NLP"]
+      },
+      {
+        "dates": "May 2023 — July 2023",
+        "org": "Vatshayan Technologies",
+        "role": "ML Engineering Intern",
         "description": "Deep dive into feature engineering, data analysis and model building on real-world datasets.",
-        "tech": ["Python", "Scikit-learn"]
+        "tech": ["Python", "Scikit-learn","Pandas", "NumPy"]
       }
     ]
   },
@@ -275,31 +275,31 @@
         "id": "programming",
         "title": "Programming",
         "description": "Core languages for scalable AI applications.",
-        "tech": ["Python", "SQL", "Pandas", "NumPy", "FastAPI"]
+        "tech": ["Python", "SQL", "FastAPI" ]
       },
       {
         "id": "ml",
         "title": "Machine Learning",
         "description": "Predictive modelling libraries and frameworks.",
-        "tech": ["XGBoost", "LightGBM", "CatBoost", "Scikit-Learn", "Optuna"]
+        "tech": ["Scikit-learn", "XGBoost", "LightGBM", "CatBoost", "LSTM", "Optuna", "MLflow"]
       },
       {
         "id": "data",
         "title": "Data Engineering",
         "description": "Processing and feature engineering at scale.",
-        "tech": ["PySpark", "MongoDB", "Pandas", "NumPy"]
+        "tech": ["Pandas", "NumPy", "MongoDB", "VectorDB", "Airflow"]
       },
       {
         "id": "cloud",
         "title": "Cloud & Deployment",
         "description": "Infrastructure for production ML systems.",
-        "tech": ["AWS EC2", "AWS S3", "Docker", "Render"]
+        "tech":  ["AWS EC2", "AWS S3", "Docker", "SigNoz"]
       },
       {
         "id": "ml",
         "title": "AI & LLM",
         "description": "Modern AI frameworks and intelligent apps.",
-        "tech": ["OpenAI", "LangChain", "RAG", "Gemini", "n8n"]
+        "tech": ["LLaMA 2", "QLoRA", "OpenAI", "Gemini", "LangChain", "RAG", "NLP", "Prompt Engineering"]
       },
       {
         "id": "tools",
@@ -342,10 +342,8 @@
     "title": "Let's build something",
     "titleAccent": "great together",
     "description": "Whether it's an ML role, a consulting project, or a chat about AI systems — my inbox is open.",
-    "formAction": "https://formspree.io/f/xplaceholder",
-    "formNote": "Replace formAction in portfolio.json with your Formspree endpoint to enable the contact form.",
     "cta": [
-      { "label": "Say Hello", "url": "mailto:deepkul2002@gmail.com", "style": "primary" },
+      { "label": "Say Hello", "url": "https://wa.me/919450165934?text=Hello%20Kuldeep%2C%20Let%27s%20discuss%20something%20interesting%20related%20to%20AI%20and%20ML", "style": "primary" },
       { "label": "LinkedIn", "url": "https://www.linkedin.com/in/kuldeepkumar1207/", "style": "ghost" }
     ]
   }
